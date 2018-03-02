@@ -13,5 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/json-20171018.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed-logging-juli.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed-logging-log4j.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
