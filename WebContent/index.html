@@ -4,23 +4,24 @@
 			 <meta charset="ISO-8859-1">
 			 <title>Ejemplo sesion</title>
 		 </head>
-
+		 <script src = 'js/xhrPromises.js'></script>
 		 <body>
-			 <form action="login" method="get">
+			 <form action="test1" method="POST">
 				 <table>
 				 <tr>
 					 <td>Usuario</td>
-					 <td><input name="usuario" /></td>
+					 <td><input name="email" /></td>
 				 </tr>
 			
 				 <tr>
 					 <td>Clave</td>
-					 <td><input name="clave" /></td>
+					 <td><input name="password" /></td>
 				 </tr>
 			 </table>
-			 	 <input type="submit" value="Enviar"/>
+			 	 <input type="submit" value="Enviar" onclick="sendValue()"/>
 			 </form>
-		 <script src = 'js/xhrPromises.js'></script>
+		 
+		 
 		 <script>
 			 var xhr = new XHR();
 			 function $(id){
@@ -31,13 +32,14 @@
 				 var password = $('password').value;
 				 var user_id = 1;
 
-				 console.log(email,password)
 				 xhr.post('/Login',{email:email, password:password},
-				 {'Content-Type':'application/x-www-form-urlencoded'}).
+				 {'Content-Type':'application/JSON'}).
 				 then(function(data){
 					 console.log(data);
+					 console.log(email,password)
 				 });
-			 }
+				 console.log(email,password)
+				 }
 		 </script>
 		 </body>
  </html>

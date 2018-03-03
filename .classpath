@@ -13,10 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/json-20171018.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed-logging-juli.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed-logging-log4j.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/Eduardo/Eclipse/postgresql-9.3-1102.jdbc41.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/Eduardo/Eclipse/postgresql-9.3-1103.jdbc3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed/tomcat-embed-logging-log4j.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed/tomcat-embed-logging-juli.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/JSON/json-20171018.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/JSON/json-simple-1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
