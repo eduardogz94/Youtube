@@ -1,14 +1,8 @@
-
-
-# Nombre del servidor 
-servidor.nombre=PC9915
-# Usuario para la conexión
-servidor.usuario=Pepe 
-# Password para la conexión
-servidor.password=poijasfr
-# Nombre del servidor 
-servidor.nombre=PC9915
-# Usuario para la conexión
-servidor.usuario=Pepe 
-# Password para la conexión
-servidor.password=poijasfr
+#jdbc Driver
+jdbc.driver = org.postgresql.Driver
+# jdbc url
+jdbc.url= jdbc:postgresql://localhost:5432/pooling
+# jdbc user
+jdbc.user =	postgres
+# jdbc password
+jdbc.password =	eagzv.999
