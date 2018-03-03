@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Ejemplo sesion</title>
-<script src = 'js/xhrPromises.js'></script>
-</head>
+	 <html>
+		 <head>
+			 <meta charset="ISO-8859-1">
+			 <title>Ejemplo sesion</title>
+		 </head>
 
-<input id = "email" type="text">
-<input id = "password" type="text">
+		 <body>
+			 <form action="login" method="get">
+				 <table>
+				 <tr>
+					 <td>Usuario</td>
+					 <td><input name="usuario" /></td>
+				 </tr>
+			
+				 <tr>
+					 <td>Clave</td>
+					 <td><input name="clave" /></td>
+				 </tr>
+			 </table>
+			 	 <input type="submit" value="Enviar"/>
+			 </form>
+		 <script src = 'js/xhrPromises.js'></script>
+		 <script>
+			 var xhr = new XHR();
+			 function $(id){
+				 return document.getElementById(id);
+			 }
+			 function sendValue(){
+				 var email = $('email').value;
+				 var password = $('password').value;
+				 var user_id = 1;
 
-<button onclick='sendValue()'>send value</button>
-<body>
-
-
-<script>
-var xhr = new XHR();
-function $(id){
-	return document.getElementById(id);
-}
-function sendValue(){
-	var email = $('email').value;
-	var password = $('password').value;
-	var user_id = 1;
-
-	console.log(email,password)
-	xhr.post('/Login',{email:email, password:password},
-	{'Content-Type':'application/x-www-form-urlencoded'}).
-	then(function(data){
-		console.log(data);
-	});
-}
-</script>
-	
-</body>
-</html>
+				 console.log(email,password)
+				 xhr.post('/Login',{email:email, password:password},
+				 {'Content-Type':'application/x-www-form-urlencoded'}).
+				 then(function(data){
+					 console.log(data);
+				 });
+			 }
+		 </script>
+		 </body>
+ </html>

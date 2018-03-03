@@ -54,8 +54,8 @@ public class Login extends HttpServlet {
 		System.out.println(reqBody);
 		JSONObject json = new JSONObject();	
 		if(session.isNew()) {
-			storeValue(reqBody.getString("email"), reqBody.getString("password"), 
-					   session);
+			storeValue(reqBody.getString("email"), reqBody.getString("password"), session);
+			session.invalidate();
 		}
 		else {
 			storeValue(reqBody.getString("email"), reqBody.getString("password"), 

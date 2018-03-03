@@ -36,16 +36,15 @@ public class Signup extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) {
-			json.put("status", "not logged in");
+			json.put("status", "not registered");
 			session.invalidate();
 		} else {
 			json.put("email", session.getAttribute("email"))
-				.put("", session.getAttribute(""))
-				.put("", session.getAttribute(""))
-				.put("", session.getAttribute(""))
-				.put("", session.getAttribute(""))
+				.put("name", session.getAttribute("name"))
+				.put("lastname", session.getAttribute("lastname"))
+				.put("username", session.getAttribute("username"))
 				.put("password", session.getAttribute("password"));
-				}
+		}
 		out.print(json.toString());
 	}
 
@@ -77,6 +76,10 @@ public class Signup extends HttpServlet {
 			HttpSession session) {
 		// TODO Auto-generated method stub
 		if(string2 == null) {
+			session.setAttribute("email", "");
+			session.setAttribute("password", "");
+			session.setAttribute("email", "");
+			session.setAttribute("password", "");
 			session.setAttribute("email", "");
 			session.setAttribute("password", "");
 		} 

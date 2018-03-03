@@ -1,8 +1,18 @@
-#jdbc Driver
+// JDBC conexion
+# JDBC Driver
 jdbc.driver = org.postgresql.Driver
-# jdbc url
+# JDBC url
 jdbc.url= jdbc:postgresql://localhost:5432/pooling
-# jdbc user
+# JDBC user
 jdbc.user =	postgres
-# jdbc password
+# JDBC password
 jdbc.password =	eagzv.999
+
+// JDBC queries
+
+# SELECT
+query.select =
+# INSERT
+query.insert = INSERT INTO () VALUES(?)
+# DELETE
+query.delete =
