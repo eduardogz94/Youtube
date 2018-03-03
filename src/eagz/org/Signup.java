@@ -14,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Signup
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Signup")
+public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Signup() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,10 +40,15 @@ public class Login extends HttpServlet {
 			session.invalidate();
 		} else {
 			json.put("email", session.getAttribute("email"))
+				.put("", session.getAttribute(""))
+				.put("", session.getAttribute(""))
+				.put("", session.getAttribute(""))
+				.put("", session.getAttribute(""))
 				.put("password", session.getAttribute("password"));
 				}
 		out.print(json.toString());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -51,27 +56,34 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-		System.out.println(reqBody);
+		System.out.println(reqBody.getInt("user_id"));
 		JSONObject json = new JSONObject();	
 		if(session.isNew()) {
-			storeValue(reqBody.getString("email"), reqBody.getString("password"), 
+			storeValue(reqBody.getInt("user_id"), /*reqBody.getBoolean("admin"),*/ reqBody.getString("name"), 
+					   reqBody.getString("lastname"), reqBody.getString("username"), 
+					   reqBody.getString("password"), reqBody.getString("email"), 
 					   session);
 		}
 		else {
-			storeValue(reqBody.getString("email"), reqBody.getString("password"), 
+			storeValue(reqBody.getInt("user_id"), /*reqBody.getBoolean("admin"),*/ reqBody.getString("name"), 
+					   reqBody.getString("lastname"), reqBody.getString("username"), 
+					   reqBody.getString("password"), reqBody.getString("email"), 
 					   session);
 		}
 			out.println(json.toString());
 	}
 
-	private void storeValue(String email, String password,HttpSession session) {
-		if(email == null) {
+	private void storeValue(int int1, String string, String string2, String string3, String string4, String string5,
+			HttpSession session) {
+		// TODO Auto-generated method stub
+		if(string2 == null) {
 			session.setAttribute("email", "");
 			session.setAttribute("password", "");
 		} 
 		else {
-			session.setAttribute("email", email);
-			session.setAttribute("password", password);
+			session.setAttribute("email", int1);
+			session.setAttribute("password", string);
 		}
 	}
+
 }

@@ -6,9 +6,6 @@
 <script src = 'js/xhrPromises.js'></script>
 </head>
 
-<input id = "name" type="text">
-<input id = "lastname" type="text">
-<input id = "username" type="text">
 <input id = "email" type="text">
 <input id = "password" type="text">
 
@@ -22,16 +19,12 @@ function $(id){
 	return document.getElementById(id);
 }
 function sendValue(){
-	var name = $('name').value;
-	var lastname = $('lastname').value;
-	var username = $('username').value;
 	var email = $('email').value;
 	var password = $('password').value;
 	var user_id = 1;
 
-	console.log(name,lastname,username,email,password)
-	xhr.post('/Login',{user_id:user_id, name:name,	lastname:lastname,
-						username:username,	password:password},
+	console.log(email,password)
+	xhr.post('/Login',{email:email, password:password},
 	{'Content-Type':'application/x-www-form-urlencoded'}).
 	then(function(data){
 		console.log(data);

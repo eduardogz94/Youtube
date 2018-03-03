@@ -1,0 +1,14 @@
+
+
+# Nombre del servidor 
+servidor.nombre=PC9915
+# Usuario para la conexión
+servidor.usuario=Pepe 
+# Password para la conexión
+servidor.password=poijasfr
+# Nombre del servidor 
+servidor.nombre=PC9915
+# Usuario para la conexión
+servidor.usuario=Pepe 
+# Password para la conexión
+servidor.password=poijasfr
