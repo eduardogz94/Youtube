@@ -35,12 +35,11 @@ public class test1 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		JSONObject json = new JSONObject();
 		PrintWriter out = response.getWriter();	
 		Database db = new Database();
 		String query = PropertiesReader.getInstance().getValue("query1");
-		System.out.println(PropertiesReader.getInstance().getValue("query1"));
+		System.out.println("asd"+PropertiesReader.getInstance().getValue("query1"));
 		json.put("query", db.executeQuery(query));
 		db.closeCon();
 		out.print(json.toString());
@@ -56,7 +55,9 @@ public class test1 extends HttpServlet {
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		Database db = new Database();
 		String query = PropertiesReader.getInstance().getValue("query2");
+		System.out.println(query);
 		json.put("query", db.executeQuery(query,reqBody.getString("email")));
+		System.out.println(query+reqBody.getString("email"));
 		db.closeCon();
 		out.print(json.toString());
 	}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+	 <html>
+		 <head>
+			 <meta charset="ISO-8859-1">
+			 <title>Ejemplo sesion</title>
+		 </head>
+		 <script src = 'js/xhrPromises.js'></script>
+		 <body>
+			 <form action="test1" method="doGet">
+				 <table>
+				 <tr>
+					 <td>Usuario</td>
+					 <td><input name="email" /></td>
+				 </tr>
+			
+				 <tr>
+					 <td>Clave</td>
+					 <td><input name="password" /></td>
+				 </tr>
+			 </table>
+			 	 <input type="submit" value="Enviar" onclick="sendValue()"/>
+			 </form>
+		 
+		 
+		 <script>
+			 var xhr = new XHR();
+			 function $(id){
+				 return document.getElementById(id);
+			 }
+			 function sendValue(){
+				 var email = $('email').value;
+				 var password = $('password').value;
+				 var user_id = 1;
+
+				 xhr.post('/Login',{email:email, password:password},
+				 {'Content-Type':'application/JSON'}).
+				 then(function(data){
+					 console.log(data);
+					 console.log(email,password)
+				 });
+				 console.log(email,password)
+				 }
+		 </script>
+		 </body>
+ </html>

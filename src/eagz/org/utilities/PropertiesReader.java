@@ -13,7 +13,6 @@ public class PropertiesReader {
 	private PropertiesReader() {
 		try {
 			input = new FileInputStream("C:\\\\Users\\\\Eduardo\\\\Documents\\\\GitHub\\\\Youtube\\config.properties");
-			System.out.println(input);
 			prop.load(input);
 		} catch (IOException ex) {
 			ex.printStackTrace();

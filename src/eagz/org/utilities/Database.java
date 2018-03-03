@@ -23,7 +23,6 @@ public class Database {
 		try {
 			Class.forName(prop.getValue("dbDriver"));
 			this.con= DriverManager.getConnection(prop.getValue("dbUrl"),prop.getValue("dbUser"),prop.getValue("dbPassword"));
-			System.out.println("conectado");
 		}
 		catch(Exception e){
 			e.getStackTrace();
