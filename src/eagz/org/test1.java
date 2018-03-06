@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -52,13 +53,33 @@ public class test1 extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
+		HttpSession session = request.getSession();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		Database db = new Database();
-		String query = PropertiesReader.getInstance().getValue("query2");
-		System.out.println(query);
-		json.put("query", db.executeQuery(query,reqBody.getString("email")));
-		System.out.println(query+reqBody.getString("email"));
-		db.closeCon();
-		out.print(json.toString());
+		
+		if(session.isNew()) {
+			String email = reqBody.getString("email");
+			String pass = reqBody.getString("password");
+			if(db.checkUser(email, pass) == true) {
+				storeValue(email, pass, session);
+				json.put("status", "200");
+			} else {
+				storeValue(email, pass, session);
+				json.put("status", "200");
+			} session.invalidate();
+		}else {
+			json.put("status", "you're already logged in");
+		}
+		out.println(json.toString());
 	}
+		public void storeValue(String email, String password,HttpSession session) {
+			if(email == null) {
+				session.setAttribute("email", "");
+				session.setAttribute("password", "");
+			} 
+			else {
+				session.setAttribute("email", email);
+				session.setAttribute("password", password);
+			}
+		}
 }

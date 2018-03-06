@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Database {
-	private ResultSet rs;
+	public ResultSet rs;
 	private ResultSetMetaData rsmd;
 	private JSONArray table;
 	private JSONObject row;
@@ -40,6 +40,20 @@ public class Database {
 			e.getStackTrace();
 		} 
 		return this.getTable(this.rs);
+	}
+	
+	public  boolean checkUser(String email, String password){
+		boolean st = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query2"));
+			this.pstmt.setString(1,email);
+			this.pstmt.setString(2,password);
+			this.rs = pstmt.executeQuery();
+			st = this.rs.next();
+			} catch (Exception e) {
+				e.getStackTrace();
+			} 
+		return st;
 	}
 	
 	public void execute(String query, Object... values) {
