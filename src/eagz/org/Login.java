@@ -2,6 +2,7 @@ package eagz.org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import eagz.org.utilities.Database;
 
 /**
  * Servlet implementation class Login
@@ -52,16 +56,30 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		System.out.println(reqBody);
-		JSONObject json = new JSONObject();	
-		if(session.isNew()) {
-			storeValue(reqBody.getString("email"), reqBody.getString("password"), session);
-			session.invalidate();
+		JSONObject b = new JSONObject();	
+		try {
+			Database db = new Database();
+			while (db.rs.next()) {
+				b.put("email", db.rs.getString(1))
+			 	 .put("password", db.rs.getString(2));
+			 }
+			
+			if(session.isNew()) {
+				storeValue(reqBody.getString("email"), reqBody.getString("password"), session);
+				session.invalidate();
+			}
+			else {
+				storeValue(reqBody.getString("email"), reqBody.getString("password"),   session);
+			}
+				out.println(b);
+				System.out.println(b);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
-			storeValue(reqBody.getString("email"), reqBody.getString("password"), 
-					   session);
-		}
-			out.println(json.toString());
 	}
 
 	private void storeValue(String email, String password,HttpSession session) {

@@ -6,7 +6,8 @@
     		 <meta name="viewport" content="width=1024, user-scalable=no, initial-scale=1, maximum-scale=1">
     		 <link rel="stylesheet" type="text/css" href="youtube.css">
 			 <script src ='js/xhrPromises.js'></script>
-		 	 <script src="js/w3.js"></script> 
+		 	 <script src="js/w3.js"></script>
+		 	 <script src="js/id.js"></script> 
 
 		 	<div w3-include-html="./layout/header.html"></div>
 		 </head>
@@ -31,23 +32,5 @@
 		        	</div>
 		     	</div>
 		 	</div>
-		
 		</body> 
-		 <script>
-			 var xhr = new XHR();
-			 function $(id){
-				 return document.getElementById(id);
-			 }
-			 function sendValue(){
-				 var email = $('email').value;
-				 var password = $('password').value;
-				 var user_id = 1;
-
-				 xhr.post('/test1',{email:email, password:password},
-				 {'Content-Type':'application/JSON'}).
-				 then(function(data){
-					 console.log(data);
-				 });
-			 }
-		 </script>
  </html>
