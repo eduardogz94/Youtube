@@ -8,7 +8,7 @@
 				 var password = $('password').value;
 				 var user_id = 1;
 
-				 xhr.post('/test1',{email:email, password:password},
+				 xhr.post('/login',{email:email, password:password},
 				 {'Content-Type':'application/JSON'}).
 				 then(function(data){
 					 console.log(data);

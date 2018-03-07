@@ -12,7 +12,7 @@ public class PropertiesReader {
 	
 	private PropertiesReader() {
 		try {
-			input = new FileInputStream("C:\\\\Users\\\\Eduardo\\\\Documents\\\\GitHub\\\\Youtube\\config.properties");
+			input = new FileInputStream("/"+ System.getProperty("user.dir")+"/config.properties");
 			prop.load(input);
 		} catch (IOException ex) {
 			ex.printStackTrace();

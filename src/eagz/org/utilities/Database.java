@@ -23,6 +23,7 @@ public class Database {
 		try {
 			Class.forName(prop.getValue("dbDriver"));
 			this.con= DriverManager.getConnection(prop.getValue("dbUrl"),prop.getValue("dbUser"),prop.getValue("dbPassword"));
+			System.out.println("asdasd");
 		}
 		catch(Exception e){
 			e.getStackTrace();
@@ -42,17 +43,17 @@ public class Database {
 		return this.getTable(this.rs);
 	}
 	
-	public  boolean checkUser(String email, String password){
+	public  boolean checkUser(String email) {
 		boolean st = false;
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query2"));
 			this.pstmt.setString(1,email);
-			this.pstmt.setString(2,password);
 			this.rs = pstmt.executeQuery();
 			st = this.rs.next();
+			System.out.println(st);
 			} catch (Exception e) {
 				e.getStackTrace();
-			} 
+			}
 		return st;
 	}
 	

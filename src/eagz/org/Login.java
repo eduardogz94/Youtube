@@ -2,7 +2,6 @@ package eagz.org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -12,29 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import eagz.org.utilities.Database;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class test1
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();	
 		HttpSession session = request.getSession();
@@ -43,51 +34,46 @@ public class Login extends HttpServlet {
 			json.put("status", "not logged in");
 			session.invalidate();
 		} else {
-			json.put("email", session.getAttribute("email"))
-				.put("password", session.getAttribute("password"));
-				}
+			json.put("status", "200")
+				.put("status", "logged in")
+				.put("password", session.getAttribute("password"))
+				.put("email", session.getAttribute("email"))
+				.put("username", session.getAttribute("username"))
+				.put("name", session.getAttribute("name"));
+		}
 		out.print(json.toString());
 	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
 		HttpSession session = request.getSession();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-		System.out.println(reqBody);
-		JSONObject b = new JSONObject();	
-		try {
-			Database db = new Database();
-			while (db.rs.next()) {
-				b.put("email", db.rs.getString(1))
-			 	 .put("password", db.rs.getString(2));
-			 }
-			
-			if(session.isNew()) {
-				storeValue(reqBody.getString("email"), reqBody.getString("password"), session);
-				session.invalidate();
+		Database db = new Database();
+		if(session.isNew()) {
+			String email = reqBody.getString("email");
+			String pass = reqBody.getString("password");
+			if(db.checkUser(email) == true) {
+				storeValue(email, pass, session);
+				json.put("status", "200");
+				json.put("status", "Login completed");
+			}else {
+				storeValue(email, pass, session);
+				json.put("status", "200");
+				json.put("status", "Email not found");
 			}
-			else {
-				storeValue(reqBody.getString("email"), reqBody.getString("password"),   session);
-			}
-				out.println(b);
-				System.out.println(b);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			session.invalidate();
+		}else {
+			json.put("status", "you're already logged in");
 		}
+		out.println(json.toString());
 	}
-
-	private void storeValue(String email, String password,HttpSession session) {
+	
+	public void storeValue(String email, String password,HttpSession session) {
 		if(email == null) {
 			session.setAttribute("email", "");
 			session.setAttribute("password", "");
-		} 
-		else {
+		} else {
 			session.setAttribute("email", email);
 			session.setAttribute("password", password);
 		}
