@@ -53,7 +53,7 @@ public class Login extends HttpServlet {
 		if(session.isNew()) {
 			String email = reqBody.getString("email");
 			String pass = reqBody.getString("password");
-			if(db.checkUser(email) == true) {
+			if(db.checkAdmin(email) == true) {
 				storeValue(email, pass, session);
 				json.put("status", "200");
 				json.put("status", "Login completed");
