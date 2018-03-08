@@ -23,11 +23,12 @@ public class Database {
 		}
 	}
 
-	public  boolean checkUser(String email) {
+	public  boolean checkUser(String email, String password) {
 		boolean state = false;
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query_checkuser"));
-			this.pstmt.setString(1,email);
+			this.pstmt.setString(1, email);
+			this.pstmt.setString(2,password);
 			this.rs = pstmt.executeQuery();
 			state = this.rs.next();
 			System.out.println(state);
@@ -51,6 +52,38 @@ public class Database {
 			
 		} catch(Exception e) {
 			e.getStackTrace();
+		}
+		return state;
+	}
+	
+	public boolean newAccount(String name, String lastname, String username, String password,String email ) {
+		boolean state = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_new"));
+			this.pstmt.setString(1,name);
+			this.pstmt.setString(2,lastname);
+			this.pstmt.setString(3,username);
+			this.pstmt.setString(4,password);
+			this.pstmt.setString(5,email);
+			this.rs = this.pstmt.executeQuery();
+			state = this.rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return state;
+	}
+	
+	public boolean newType(String descrip) {
+		int type_id = 2;
+		boolean state = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_newType"));
+			this.pstmt.setInt(1,type_id);
+			this.pstmt.setString(2,descrip);
+			this.rs = this.pstmt.executeQuery();
+			state = this.rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return state;
 	}

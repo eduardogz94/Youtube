@@ -24,17 +24,16 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
-		String nombre = session.getAttribute("email").toString();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) { 
-			json.put("status", "You're not logged in");
+			json.put("response", "You're not logged in").put("status", "200");
 			session.invalidate();
 		}
 		else { 
-			json.put("status","You're logged out");
+			json.put("response","You have logged out").put("status","200");
 			session.invalidate();
 		}
-		out.print("Logout para: "+nombre);
+		out.print(json.toString());
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

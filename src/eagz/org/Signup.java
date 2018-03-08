@@ -46,38 +46,41 @@ public class Signup extends HttpServlet {
  		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
  		JSONObject json = new JSONObject();
  		Database db = new Database();
+ 		
+ 		String email = reqBody.getString("email"); String password = reqBody.getString("password");
+ 		String name = reqBody.getString("email"); String lastname = reqBody.getString("lastname");
+ 		String username = reqBody.getString("username");
+ 		
  		if(session.isNew()) {
- 			if(db.checkUser(reqBody.getString("email")) == true) {
- 				json.put("status", "email already used");
- 				storeValue(reqBody.getString("email"), reqBody.getString("username"), 
- 						   reqBody.getString("pass"), reqBody.getInt("type_id"), session);
+ 			if(db.checkUser(email,password) == false) {
+ 		    	db.newAccount(name,lastname,username,password,email);
+ 		    	json.put("response", "Signup Finished").put("status", "200");
+ 				storeValue(name,lastname,username,password,email, session);
  				session.invalidate();
- 			} else {
- 				json.put("status", "200");
- 				storeValue(reqBody.getString("email"), reqBody.getString("username"), reqBody.getString("pass"), 
- 						   reqBody.getInt("type_id"), session);
+ 		    }else {
+ 		    	json.put("response", "email already used").put("status", "200");
+ 					storeValue(name,lastname,username,password,email, session);
+ 					session.invalidate(); 
  			}
- 		} else {
- 			json.put("status", "you are registered already");
- 			storeValue(reqBody.getString("email"), reqBody.getString("username"), reqBody.getString("pass"), reqBody.getInt("type_id"), session);
- 			session.invalidate(); 
- 		}
  		out.println(json.toString());
- 	}
-
-	private void storeValue(String email, String username, String password, int type_id, HttpSession session) {
-		// TODO Auto-generated method stub
+ 		}
+    }   
+		
+	private void storeValue(String name, String lastname,String password, String username,String email, HttpSession session) {
 		if(email == null) {
-			session.setAttribute("email", "");
-			session.setAttribute("password", "");
+			session.setAttribute("name", "");
+			session.setAttribute("lastname", "");
 			session.setAttribute("username", "");
-			session.setAttribute("type_id", "");
+			session.setAttribute("password", "");
+			session.setAttribute("email", "");
 		} 
+		
 		else {
-			session.setAttribute("email", email);
-			session.setAttribute("password", password);
+			session.setAttribute("name", name);
+			session.setAttribute("lastname", lastname);
 			session.setAttribute("username", username);
-			session.setAttribute("type_id", type_id);
+			session.setAttribute("password", password);
+			session.setAttribute("email", email);
 		}
 	}
 

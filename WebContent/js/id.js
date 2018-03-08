@@ -3,18 +3,21 @@ var wrapper = new XHR();
 		return document.getElementById(id);
 	}
 
-	function new_account() {
+	function signup() {
 		var email = $('email').value;
 		var username = $('username').value;
 		var password = $('password').value;
-		wrapper.post('./Register',{email:email, username:username, password:password, admin:admin},{'Content-Type':'application/json'}).then(function(data){
+		var name = $('email').value;
+		var lastname = $('lastname').value;
+		wrapper.post('/Signup',{email:email, username:username, password:password, name:name, lastname:lastname},
+			{'Content-Type':'x-www-form-urlencoded'}).then(function(data){
 			if(data.status == (200)) {
 				window.location.href = "./index.html";
-				alert("Log in successful")
+				console.log(data);
+				alert("Signup Done")
 			} else {
-				alert("Wrong password or email");
+				console.log("Wrong password or email");
 			}
-			console.log(data);
 		}).catch(function(error) {
 			console.log(error);
 			});
@@ -27,18 +30,30 @@ var wrapper = new XHR();
 			if(data.status == (200)) {
 				window.location.href = "./index.html";
 				alert("Log in successful")
-			} else {
-				console.log("Wrong password or email");
+			}else {
+				console.log("Log in unsucessfully");
 			}
 			console.log(data);
 		}).catch(function(error) {
 			console.log(error);
 			});
-	}	
+	}
+
+	function logout() {
+		wrapper.get('/Logout',{},{}).then(function(data){
+			if(data.status == 200) {
+				window.location.href = "./login.html";
+				console.log("You have been logged out")
+			}else {
+				console.log("You're not logged in" + data.status);
+			}
+			console.log(data);
+		}).catch(function(error) {
+			console.log(error);
+			});
+	}
 	
 	function is_logged() {
 		wrapper.get('./Login',{},{'Content-Type':'application/x-www-form-urlencoded'}).then((data) => {
 		});
 	}
-	
-	$('login').addEventListener('click', login);

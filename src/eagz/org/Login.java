@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import eagz.org.utilities.Database;
 
+
 /**
  * Servlet implementation class test1
  */
@@ -31,15 +32,16 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) {
-			json.put("status", "not logged in");
+			json.put("response", "not logged in").put("status", "200");
 			session.invalidate();
 		} else {
 			json.put("status", "200")
-				.put("status", "logged in")
+				.put("response", "logged in")
 				.put("password", session.getAttribute("password"))
 				.put("email", session.getAttribute("email"))
 				.put("username", session.getAttribute("username"))
 				.put("name", session.getAttribute("name"));
+			session.invalidate();
 		}
 		out.print(json.toString());
 	}
@@ -51,25 +53,22 @@ public class Login extends HttpServlet {
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		Database db = new Database();
 		if(session.isNew()) {
-			String email = reqBody.getString("email");
-			String pass = reqBody.getString("password");
-			if(db.checkUser(email) == true) {
+			String email = reqBody.getString("email"); String pass = reqBody.getString("password");
+			if(db.checkUser(email,pass) == true) {
 				if (db.checkAdmin(email)) {
 				storeValue(email, pass, session);
-				json.put("status", "200");
-				json.put("status", "Login completed");
+				json.put("status", "200").put("response", "admin");
 			}else {
 				storeValue(email, pass, session);
-				json.put("status", "200");
-				json.put("status", "Email not found");
-				session.invalidate();
+				json.put("status", "200").put("response", "user");
 			}
 		}else {
-			json.put("status", "Email not found");
+			json.put("response", "Wrong email or password").put("status", "200");
 			session.invalidate();
 		}
-		out.println(json.toString());
-	}
+		}else {
+			json.put("response", "you're logged in").put("status", "200");
+		}out.println(json.toString());
 	}		
 	
 	public void storeValue(String email, String password,HttpSession session) {
