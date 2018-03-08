@@ -53,7 +53,8 @@ public class Login extends HttpServlet {
 		if(session.isNew()) {
 			String email = reqBody.getString("email");
 			String pass = reqBody.getString("password");
-			if(db.checkAdmin(email) == true) {
+			if(db.checkUser(email) == true) {
+				if (db.checkAdmin(email)) {
 				storeValue(email, pass, session);
 				json.put("status", "200");
 				json.put("status", "Login completed");
@@ -61,13 +62,15 @@ public class Login extends HttpServlet {
 				storeValue(email, pass, session);
 				json.put("status", "200");
 				json.put("status", "Email not found");
+				session.invalidate();
 			}
-			session.invalidate();
 		}else {
-			json.put("status", "you're already logged in");
+			json.put("status", "Email not found");
+			session.invalidate();
 		}
 		out.println(json.toString());
 	}
+	}		
 	
 	public void storeValue(String email, String password,HttpSession session) {
 		if(email == null) {

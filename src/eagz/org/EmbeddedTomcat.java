@@ -19,8 +19,8 @@ public class EmbeddedTomcat {
 		Context ctxt = null;
 		System.out.println("Tomcat levantara en el puerto: " + port);
 		ctxt = tomcat.addWebapp("/", System.getProperty("user.dir"));
-		Tomcat.addServlet(ctxt, "login", servlet);
-		ctxt.addServletMappingDecoded("/login", "login");
+		Tomcat.addServlet(ctxt, "Login", servlet);
+		ctxt.addServletMappingDecoded("/Login", "Login");
 		tomcat.start();
 		tomcat.getServer().await();
 	}

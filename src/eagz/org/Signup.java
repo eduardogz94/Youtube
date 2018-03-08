@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import eagz.org.utilities.Database;
+
 /**
  * Servlet implementation class Signup
  */
@@ -32,60 +34,50 @@ public class Signup extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();	
-		HttpSession session = request.getSession();
-		JSONObject json = new JSONObject();
-		if(session.isNew()) {
-			json.put("status", "not registered");
-			session.invalidate();
-		} else {
-			json.put("email", session.getAttribute("email"))
-				.put("name", session.getAttribute("name"))
-				.put("lastname", session.getAttribute("lastname"))
-				.put("username", session.getAttribute("username"))
-				.put("password", session.getAttribute("password"));
-		}
-		out.print(json.toString());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession();
-		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-		System.out.println(reqBody.getInt("user_id"));
-		JSONObject json = new JSONObject();	
-		if(session.isNew()) {
-			storeValue(reqBody.getInt("user_id"), /*reqBody.getBoolean("admin"),*/ reqBody.getString("name"), 
-					   reqBody.getString("lastname"), reqBody.getString("username"), 
-					   reqBody.getString("password"), reqBody.getString("email"), 
-					   session);
-		}
-		else {
-			storeValue(reqBody.getInt("user_id"), /*reqBody.getBoolean("admin"),*/ reqBody.getString("name"), 
-					   reqBody.getString("lastname"), reqBody.getString("username"), 
-					   reqBody.getString("password"), reqBody.getString("email"), 
-					   session);
-		}
-			out.println(json.toString());
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+ 		HttpSession session = request.getSession();
+ 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+ 		JSONObject json = new JSONObject();
+ 		Database db = new Database();
+ 		if(session.isNew()) {
+ 			if(db.checkUser(reqBody.getString("email")) == true) {
+ 				json.put("status", "email already used");
+ 				storeValue(reqBody.getString("email"), reqBody.getString("username"), 
+ 						   reqBody.getString("pass"), reqBody.getInt("type_id"), session);
+ 				session.invalidate();
+ 			} else {
+ 				json.put("status", "200");
+ 				storeValue(reqBody.getString("email"), reqBody.getString("username"), reqBody.getString("pass"), 
+ 						   reqBody.getInt("type_id"), session);
+ 			}
+ 		} else {
+ 			json.put("status", "you are registered already");
+ 			storeValue(reqBody.getString("email"), reqBody.getString("username"), reqBody.getString("pass"), reqBody.getInt("type_id"), session);
+ 			session.invalidate(); 
+ 		}
+ 		out.println(json.toString());
+ 	}
 
-	private void storeValue(int int1, String string, String string2, String string3, String string4, String string5,
-			HttpSession session) {
+	private void storeValue(String email, String username, String password, int type_id, HttpSession session) {
 		// TODO Auto-generated method stub
-		if(string2 == null) {
+		if(email == null) {
 			session.setAttribute("email", "");
 			session.setAttribute("password", "");
-			session.setAttribute("email", "");
-			session.setAttribute("password", "");
-			session.setAttribute("email", "");
-			session.setAttribute("password", "");
+			session.setAttribute("username", "");
+			session.setAttribute("type_id", "");
 		} 
 		else {
-			session.setAttribute("email", int1);
-			session.setAttribute("password", string);
+			session.setAttribute("email", email);
+			session.setAttribute("password", password);
+			session.setAttribute("username", username);
+			session.setAttribute("type_id", type_id);
 		}
 	}
 
