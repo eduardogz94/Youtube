@@ -3,9 +3,6 @@
 		 <head>
 			 <title>Ejemplo sesion</title>
 			 <meta charset="utf-8">
-    		 <script src ='js/xhrPromises.js'></script>
-		 	 <script src="js/w3.js"></script>
-
 		 	<div w3-include-html="./layout/header.html"></div>
 		 </head>
 
@@ -18,14 +15,14 @@
 		        	<div class="register-form  col-md-8 col-md-offset-4">
 		          		<div class="form">
 		            		<ul class="col-md-6">
-		            			Email : <input type='text' class="form-control " id ='email' ><br>
-		          				Password : <input type='password' id ='password' class="form-control"><br>
-		          				Name : <input type='text' id ='name' class="form-control"><br>
-		          				Last name : <input type='text' id ='lastname' class="form-control"><br>
-		          				Username : <input type='text' id ='username' class="form-control"><br>
+		            			Email : <input type="email" class="form-control " id ='iemail' ><br>
+		          				Password : <input type="password" id ='ipassword' class="form-control"><br>
+		          				Name : <input type="name" id ='iname' class="form-control"><br>
+		          				Last name : <input type="lastname" id ='ilastname' class="form-control"><br>
+		          				Username : <input type="username" id ='iusername' class="form-control"><br>
 		          			</ul>	
 		            	<div class="col-sm-8 col-md-offset-2" >
-		            		<button type="button" class="btn btn-primary bt-lg" id="" onclick="signup()">login</button>
+		            		<button type="button" class="btn btn-primary bt-lg" onclick="validateSignup()">login</button>
 		        		</div>
 		            	</div>
 		     
@@ -34,4 +31,6 @@
 		 	</div>
 		</body> 
 		 <script src="js/id.js"></script> 
+		 <script src ='js/xhrPromises.js'></script>
+		 <script src="js/w3.js"></script>
  </html>

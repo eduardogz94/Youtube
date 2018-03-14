@@ -1,59 +1,82 @@
 var wrapper = new XHR();
-	function $(id) {
-		return document.getElementById(id);
-	}
 
-	function signup() {
-		var email = $('email').value;
-		var username = $('username').value;
-		var password = $('password').value;
-		var name = $('email').value;
-		var lastname = $('lastname').value;
-		wrapper.post('/Signup',{email:email, username:username, password:password, name:name, lastname:lastname},
-			{'Content-Type':'x-www-form-urlencoded'}).then(function(data){
-			if(data.status == (200)) {
-				window.location.href = "./index.html";
-				console.log(data);
-				alert("Signup Done")
-			} else {
-				console.log("Wrong password or email");
-			}
-		}).catch(function(error) {
-			console.log(error);
-			});
-	}	
+function $(id) {
+	return document.getElementById(id);
+}
 
-	function login() {
-		var email = $('email').value;
-		var password = $('password').value;
-		wrapper.post('/Login',{email:email, password:password},{'Content-Type':'x-www-form-urlencoded'}).then(function(data){
-			if(data.status == (200)) {
-				window.location.href = "./index.html";
-				alert("Log in successful")
-			}else {
-				console.log("Log in unsucessfully");
-			}
-			console.log(data);
-		}).catch(function(error) {
-			console.log(error);
-			});
-	}
-
-	function logout() {
-		wrapper.get('/Logout',{},{}).then(function(data){
-			if(data.status == 200) {
-				window.location.href = "./login.html";
-				console.log("You have been logged out")
-			}else {
-				console.log("You're not logged in" + data.status);
-			}
-			console.log(data);
-		}).catch(function(error) {
-			console.log(error);
-			});
-	}
+function validateLogin(input){
+	var email = /[a-z]/.test($('iemail').value);
+	var password = /[0-9]/.test($('ipassword').value);
 	
-	function is_logged() {
-		wrapper.get('./Login',{},{'Content-Type':'application/x-www-form-urlencoded'}).then((data) => {
+	email && password ? login() : alert("Not valid");
+}
+
+function validateSignup(input){
+	var email = /[a-z]/.test($('iemail').value);
+	var username = /[a-z]/.test($('iusername').value);
+	var password = /[0-9]/.test($('ipassword').value);
+	var name = /[a-z]/.test($('iname').value);
+	var lastname = /[a-z]/.test($('ilastname').value);
+	
+	email && username && password && name && lastname ? signup() : alert("Not valid");
+}
+
+function signup() {
+	var email = $('iemail').value;
+	var username = $('iusername').value;
+	var password = $('ipassword').value;
+	var name = $('iname').value;
+	var lastname = $('ilastname').value;
+	
+	wrapper.post('/Signup',{email:email, username:username, password:password, name:name, lastname:lastname},
+		{'Content-Type':'application/json'}).then(function(data){
+		if(data.status == (200)) {
+			console.log(data);
+			window.location.href = "./index.html";
+			alert("Signup Done")
+		} else {
+			console.log(data);
+			alert("Email already used");
+		}
+	}).catch(function(error) {
+		console.log(error);
 		});
-	}
+}	
+
+function login() {
+	var email = $('iemail').value;
+	var password = $('ipassword').value;
+	
+	wrapper.post('/Login',{email:email, password:password},{'Content-Type':'application/json'}).then(function(data){
+		if(data.status == (200)) {
+			console.log(data);
+			window.location.href = "./index.html";
+			alert("Log in successful")
+		}else {
+			console.log(data);
+			alert("Log in unsucessfully");
+		} 
+	}).catch(function(error) {
+		console.log(error);
+		});
+}
+
+function logout() {
+	wrapper.get('/Logout',{},{}).then(function(data){
+		if(data.status == 200) {
+			console.log(data);
+			window.location.href = "./login.html";
+			alert("You have been logged out")
+		}else {
+			console.log(data);
+			alert("You're not logged in: " + data.status);
+		}
+	}).catch(function(error) {
+		console.log(error);
+		});
+}
+
+function is_logged() {
+	wrapper.get('./Login',{},{'Content-Type':'application/x-www-form-urlencoded'}).then((data) => {
+	});
+}

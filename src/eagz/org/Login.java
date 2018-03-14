@@ -56,18 +56,19 @@ public class Login extends HttpServlet {
 			String email = reqBody.getString("email"); String pass = reqBody.getString("password");
 			if(db.checkUser(email,pass) == true) {
 				if (db.checkAdmin(email)) {
-				storeValue(email, pass, session);
-				json.put("status", "200").put("response", "admin");
+					storeValue(email, pass
+							, session);
+					json.put("status", "200").put("response", "admin");
+				}else {
+					storeValue(email, pass, session);
+					json.put("status", "200").put("response", "user");
+				}
 			}else {
-				storeValue(email, pass, session);
-				json.put("status", "200").put("response", "user");
+				json.put("response", "Wrong email or password").put("status", "400");
+				session.invalidate();
 			}
 		}else {
-			json.put("response", "Wrong email or password").put("status", "200");
-			session.invalidate();
-		}
-		}else {
-			json.put("response", "you're logged in").put("status", "200");
+			json.put("response", "you're logged in").put("status", "400");
 		}out.println(json.toString());
 	}		
 	

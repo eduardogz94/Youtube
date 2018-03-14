@@ -34,7 +34,12 @@ public class Signup extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+        PrintWriter out = response.getWriter();
+        Database db = new Database();
+ 		String test = "eg";
+ 		out.println(db.checkSign(test));
+    	System.out.println(db.checkSign(test));
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,13 +57,13 @@ public class Signup extends HttpServlet {
  		String username = reqBody.getString("username");
  		
  		if(session.isNew()) {
- 			if(db.checkUser(email,password) == false) {
+ 			if(db.checkSign(email) == false) {
  		    	db.newAccount(name,lastname,username,password,email);
  		    	json.put("response", "Signup Finished").put("status", "200");
  				storeValue(name,lastname,username,password,email, session);
  				session.invalidate();
  		    }else {
- 		    	json.put("response", "email already used").put("status", "200");
+ 		    	json.put("response", "email already used").put("status", "400");
  					storeValue(name,lastname,username,password,email, session);
  					session.invalidate(); 
  			}

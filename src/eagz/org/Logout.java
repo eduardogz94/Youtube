@@ -26,7 +26,7 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) { 
-			json.put("response", "You're not logged in").put("status", "200");
+			json.put("response", "You're not logged in").put("status", "400");
 			session.invalidate();
 		}
 		else { 

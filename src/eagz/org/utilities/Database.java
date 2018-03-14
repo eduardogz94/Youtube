@@ -56,6 +56,19 @@ public class Database {
 		return state;
 	}
 	
+	public boolean checkSign(String email) {
+		boolean state = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_checkusersign"));
+			this.pstmt.setString(1, email);
+			this.rs = this.pstmt.executeQuery();
+			state = this.rs.next();
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return state;
+	}
+	
 	public boolean newAccount(String name, String lastname, String username, String password,String email ) {
 		boolean state = false;
 		try {
