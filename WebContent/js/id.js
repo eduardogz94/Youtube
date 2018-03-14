@@ -18,7 +18,7 @@ function validateSignup(input){
 	var name = /[a-z]/.test($('iname').value);
 	var lastname = /[a-z]/.test($('ilastname').value);
 	
-	email && username && password && name && lastname ? signup() : alert("Not valid");
+	(email && username && password && name && lastname) ? signup() : alert("Not valid");
 }
 
 function signup() {
@@ -50,7 +50,7 @@ function login() {
 	wrapper.post('/Login',{email:email, password:password},{'Content-Type':'application/json'}).then(function(data){
 		if(data.status == (200)) {
 			console.log(data);
-			window.location.href = "./index.html";
+			window.location.href = "./userindex.html";
 			alert("Log in successful")
 		}else {
 			console.log(data);
@@ -65,7 +65,7 @@ function logout() {
 	wrapper.get('/Logout',{},{}).then(function(data){
 		if(data.status == 200) {
 			console.log(data);
-			window.location.href = "./login.html";
+			window.location.href = "./index.html";
 			alert("You have been logged out")
 		}else {
 			console.log(data);

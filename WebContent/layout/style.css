@@ -1,0 +1,17 @@
+.container {
+	text-align: center;
+	align-content: center;
+}
+
+.text-justify {
+	text-align: justify;
+}
+
+.file{
+	align-content: center;
+}
+
+button {
+	border: 0;
+	padding: 15px;
+}
