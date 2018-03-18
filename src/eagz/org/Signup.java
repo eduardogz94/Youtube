@@ -52,26 +52,26 @@ public class Signup extends HttpServlet {
  		JSONObject json = new JSONObject();
  		Database db = new Database();
  		
- 		String email = reqBody.getString("email"); String password = reqBody.getString("password");
- 		String name = reqBody.getString("email"); String lastname = reqBody.getString("lastname");
+ 		String email = reqBody.getString("email"); 
+ 		String password = reqBody.getString("password");
+ 		String name = reqBody.getString("name"); 
+ 		String lastname = reqBody.getString("lastname");
  		String username = reqBody.getString("username");
  		
  		if(session.isNew()) {
- 			if(db.checkSign(email) == false) {
+ 			if(db.checkSign(email)) {
  		    	db.newAccount(name,lastname,username,password,email);
- 		    	json.put("response", "Signup Finished").put("status", "200");
- 				storeValue(name,lastname,username,password,email, session);
- 				session.invalidate();
- 		    }else {
+ 		    	json.put("response", "signup Finished").put("status", "200");
+ 		    	session.invalidate();
+ 			}else {
  		    	json.put("response", "email already used").put("status", "400");
- 					storeValue(name,lastname,username,password,email, session);
- 					session.invalidate(); 
+ 				session.invalidate(); 
  			}
  		out.println(json.toString());
  		}
-    }   
-		
-	private void storeValue(String name, String lastname,String password, String username,String email, HttpSession session) {
+   }   
+}		
+/*	private void storeValue(String name, String lastname,String password, String username,String email, HttpSession session) {
 		if(email == null) {
 			session.setAttribute("name", "");
 			session.setAttribute("lastname", "");
@@ -90,3 +90,4 @@ public class Signup extends HttpServlet {
 	}
 
 }
+*/

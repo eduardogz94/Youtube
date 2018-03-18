@@ -4,7 +4,7 @@
 			 <meta charset="ISO-8859-1">
 			 <title>Ejemplo sesion</title>
 		 	 <div w3-include-html="./layout/layout.html"></div>
-		 	 <link rel="stylesheet" href="./layout/style.css" />
+		 	 <link rel="stylesheet" href="./layout/style.css"/>
 		 </head>
 	 
 	 <body>	
@@ -13,20 +13,18 @@
 		        <div> 
 			 	 	 	<h1 style="text-align: center;">Welcome</h1>
 			 	 	 	<hr/>
-			 			<ul>
-				 			<input type="file" id="file">
-				 		</ul>
+			 				<input type="file" id="upfile">
 				 </div>
 			</div>
 
-			<div class="file">
+			<div>
 		         <div>
 		             <ul>
 		            	 <button onclick="upload()">Upload a video</button>
-				 	 	 <h3 style="text-align: center;" id="uploadStatus" ></h3>
+				 	 	 <h3 style="text-align: center;" id="uploadStatus"></h3>
 				 	  <hr/>
+				 	 	 <input type="text" id="downfile"></input>
 				 	 	 <button onclick="download()">Search a video</button>	
-				 		 <img id="myImg" alt="">
 		          	 </ul>	
 		         </div>
 		     </div>

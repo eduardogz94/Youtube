@@ -31,7 +31,7 @@ public class Database {
 			this.pstmt.setString(2,password);
 			this.rs = pstmt.executeQuery();
 			state = this.rs.next();
-			System.out.println(state);
+			System.out.println("user: "+ state);
 			} catch (Exception e) {
 				e.getStackTrace();
 			}
@@ -47,7 +47,7 @@ public class Database {
 			rs.next();
 			if(this.rs.getString("type_id").equals("1")) {
 				state = true;
-			System.out.println(state);
+			System.out.println("is admin? "+ state);
 			}
 			
 		} catch(Exception e) {
@@ -62,7 +62,14 @@ public class Database {
 			this.pstmt = con.prepareStatement(prop.getValue("query_checkusersign"));
 			this.pstmt.setString(1, email);
 			this.rs = this.pstmt.executeQuery();
-			state = this.rs.next();
+			boolean state1 = this.rs.next();
+			System.out.println("Results:"+ state1);
+			if(state1) {
+				System.out.println("Email exists");
+			} else{
+				state = true;
+				System.out.println("Sign up completed");
+			}
 		} catch (Exception e) {
 			e.getStackTrace();
 		}

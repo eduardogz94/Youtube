@@ -14,39 +14,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-/**
- * Servlet implementation class FileUp
- */
-@MultipartConfig
+@MultipartConfig()
 @WebServlet("/FileUp")
+
 public class FileUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public FileUp() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		out.print("{\"status\":200,\"res\":\"OK/GET\"}");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			Part file = request.getPart("file");
 			InputStream filecontent = file.getInputStream();
 			OutputStream os = null;
 			try {
-				String baseDir = "c:/test";
+				String baseDir = "./videos";
 				os = new FileOutputStream(baseDir + "/" + this.getFileName(file));
 				int read = 0;
 				byte[] bytes = new byte[1024];

@@ -1,0 +1,160 @@
+
+CREATE TABLE public.personas (
+                cedula VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                correo VARCHAR NOT NULL,
+                nombre VARCHAR NOT NULL,
+                password VARCHAR NOT NULL,
+                es_paciente BOOLEAN DEFAULT true NOT NULL,
+                CONSTRAINT personas_pkey PRIMARY KEY (cedula)
+);
+
+
+CREATE TABLE public.medicos (
+                imedicos_d BIGINT NOT NULL,
+                cedula VARCHAR NOT NULL,
+                bio VARCHAR NOT NULL,
+                localidad VARCHAR NOT NULL,
+                horario VARCHAR NOT NULL,
+                precio INTEGER NOT NULL,
+                CONSTRAINT medicos_pkey PRIMARY KEY (imedicos_d)
+);
+
+
+CREATE TABLE public.pacientes (
+                paciente_id BIGINT NOT NULL,
+                cedula VARCHAR NOT NULL,
+                tratamiento_medico VARCHAR NULL,
+                CONSTRAINT pacientes_pkey PRIMARY KEY (paciente_id)
+);
+
+
+CREATE TABLE public.clinico (
+                paciente_id BIGINT NOT NULL,
+                Tensin_arterial_alta VARCHAR NOT NULL,
+                Acidez_estomacal VARCHAR NOT NULL,
+                Dentadura_completa VARCHAR NOT NULL,
+                Dentadura_parcial VARCHAR NOT NULL,
+                Prtesis VARCHAR NOT NULL,
+                Edentulia VARCHAR NOT NULL,
+                Alergias VARCHAR NOT NULL,
+                Prdida_de_peso VARCHAR NOT NULL,
+                Aumento_de_peso VARCHAR NOT NULL,
+                Resequedad_en_piel VARCHAR NOT NULL,
+                Antecedentes_medicos VARCHAR NOT NULL,
+                Actividad_fsica VARCHAR NOT NULL,
+                Horas_de_trabajo VARCHAR NOT NULL,
+                Ocupacin VARCHAR NOT NULL,
+                Edema VARCHAR NOT NULL,
+                Estreimiento VARCHAR NOT NULL,
+                Diarrea VARCHAR NOT NULL,
+                Flatulencia VARCHAR NOT NULL,
+                Gastritis VARCHAR NOT NULL,
+                CONSTRAINT clinico_pkey PRIMARY KEY (paciente_id)
+);
+
+
+CREATE TABLE public.citas (
+                paciente_id BIGINT NOT NULL,
+                imedicos_d BIGINT NOT NULL,
+                id BIGINT NOT NULL,
+                fecha VARCHAR NOT NULL,
+                estado BOOLEAN NOT NULL,
+                rank INTEGER NOT NULL,
+                CONSTRAINT citas_pkey PRIMARY KEY (paciente_id, imedicos_d, id)
+);
+
+
+CREATE TABLE public.Antropometricos (
+                paciente_id BIGINT NOT NULL,
+                Peso_actual VARCHAR NOT NULL,
+                Talla_actual VARCHAR NOT NULL,
+                Cintura VARCHAR NOT NULL,
+                c_braquial VARCHAR NOT NULL,
+                P_trceps VARCHAR NOT NULL,
+                P_Biceps VARCHAR NOT NULL,
+                Pesotalla VARCHAR NOT NULL,
+                Tallaedad VARCHAR NOT NULL,
+                Circunferencia_de_pantorrilla VARCHAR NOT NULL,
+                Pesoedad VARCHAR NOT NULL,
+                Column__area_grasa VARCHAR NOT NULL,
+                Column__area_magra VARCHAR NOT NULL,
+                C_ceflica VARCHAR NOT NULL,
+                P_subscapular VARCHAR NOT NULL,
+                P_abdominal VARCHAR NOT NULL,
+                IMC VARCHAR NOT NULL,
+                Column__prdida_de_peso VARCHAR NOT NULL,
+                CONSTRAINT antropometricos_pkey PRIMARY KEY (paciente_id)
+);
+
+
+CREATE TABLE public.bioquimicos (
+                paciente_id BIGINT NOT NULL,
+                Glicemia_en_ayunas VARCHAR NOT NULL,
+                Hb_glicosilada VARCHAR NOT NULL,
+                Colesterol_total VARCHAR NOT NULL,
+                TAG VARCHAR NOT NULL,
+                Creatinina VARCHAR NOT NULL,
+                LDL VARCHAR NOT NULL,
+                Ac_rico VARCHAR NOT NULL,
+                VLDL VARCHAR NOT NULL,
+                Hg VARCHAR NOT NULL,
+                HT VARCHAR NOT NULL,
+                Pr_total_albumina VARCHAR NOT NULL,
+                HDL VARCHAR NOT NULL,
+                Urea VARCHAR NOT NULL,
+                Insulina_en_ayuna VARCHAR NOT NULL,
+                Insulina_postpandrial VARCHAR NOT NULL,
+                Glicemia_postpandrial VARCHAR NOT NULL,
+                CONSTRAINT bioquimicos_pkey PRIMARY KEY (paciente_id)
+);
+
+
+ALTER TABLE public.pacientes ADD CONSTRAINT personas_pacientes_fk
+FOREIGN KEY (cedula)
+REFERENCES public.personas (cedula)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.medicos ADD CONSTRAINT personas_medicos_fk
+FOREIGN KEY (cedula)
+REFERENCES public.personas (cedula)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.citas ADD CONSTRAINT medicos_citas_fk
+FOREIGN KEY (imedicos_d)
+REFERENCES public.medicos (imedicos_d)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.bioquimicos ADD CONSTRAINT pacientes_bioquimicos_fk
+FOREIGN KEY (paciente_id)
+REFERENCES public.pacientes (paciente_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.Antropometricos ADD CONSTRAINT pacientes_antropometricos_fk
+FOREIGN KEY (paciente_id)
+REFERENCES public.pacientes (paciente_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.citas ADD CONSTRAINT pacientes_citas_fk
+FOREIGN KEY (paciente_id)
+REFERENCES public.pacientes (paciente_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.clinico ADD CONSTRAINT pacientes_clinico_fk
+FOREIGN KEY (paciente_id)
+REFERENCES public.pacientes (paciente_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;

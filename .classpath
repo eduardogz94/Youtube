@@ -19,5 +19,7 @@
 	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/tomcat-embed/tomcat-embed-logging-juli.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/JSON/json-20171018.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Eduardo/Desktop/jars/JSON/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Documents/GitHub/Youtube/jars/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Eduardo/Documents/GitHub/Youtube/jars/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

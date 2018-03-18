@@ -3,25 +3,27 @@ function $ (id) {
 }
 
 var xhr = new XMLHttpRequest();
-var myFile = "";
+var file = "";
+
+
 function upload () {
-	var formData = new FormData();
-	formData.append("file", $("file").files[0]);
-	myFile = $("file").files[0].name;
+	var formData = new FormData($('upfile'));
+	formData.append("file", $("upfile").files[0]);
+	file = $("upfile").files[0].name;
 	
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
 			$("uploadStatus").textContent = xhr.responseText + "\nFile uploaded";
 		}
 	}
-	xhr.open("post", "./FileUp", true);	
+	xhr.open("POST", "./FileUp", true);	
 	xhr.send(formData);
 	
 }
 
 
 function download () {
-	var url = "./GetFile?name="+ myFile;
-	$("myImg").src = url;
+	file = $("downfile").value;
+	var url = "./GetFile?name="+ file;
 	var downloadWindow = window.open(url);
 }
