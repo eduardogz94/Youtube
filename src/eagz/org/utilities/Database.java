@@ -12,6 +12,7 @@ public class Database {
 	private PreparedStatement pstmt;
 	private Connection con;
 	private PropertiesReader prop = PropertiesReader.getInstance();
+	private Encrypt md;
 	
 	public Database(){
 		try {
@@ -76,9 +77,27 @@ public class Database {
 		return state;
 	}
 	
+	public boolean newVideo(String name, String filename,String descripcio) {
+		boolean state = false;
+		try {
+			String url = "./videos";
+			this.pstmt = con.prepareStatement(prop.getValue("query_newVideo"));
+			this.pstmt.setString(1, url);
+			this.pstmt.setString(2, name);
+			this.pstmt.setString(3, filename);
+			this.pstmt.setString(4, descripcio);
+			this.rs = this.pstmt.executeQuery();
+			state = this.rs.next();
+		} catch (SQLException e) {
+		e.printStackTrace();
+		}		
+		return state;
+	}
+	
 	public boolean newAccount(String name, String lastname, String username, String password,String email ) {
 		boolean state = false;
 		try {
+			md = new Encrypt(password);
 			this.pstmt = con.prepareStatement(prop.getValue("query_new"));
 			this.pstmt.setString(1,name);
 			this.pstmt.setString(2,lastname);

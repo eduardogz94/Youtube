@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import eagz.org.utilities.Database;
+
 @MultipartConfig()
 @WebServlet("/FileUp")
 
@@ -34,6 +36,10 @@ public class FileUp extends HttpServlet {
 			InputStream filecontent = file.getInputStream();
 			OutputStream os = null;
 			try {
+				if(file != null) {
+				Database db = new Database();
+				db.newVideo(file.getName(), getFileName(file), "a");
+				
 				String baseDir = "./videos";
 				os = new FileOutputStream(baseDir + "/" + this.getFileName(file));
 				int read = 0;
@@ -42,7 +48,7 @@ public class FileUp extends HttpServlet {
 				while ((read = filecontent.read(bytes)) != -1) {
 					os.write(bytes, 0, read);
 				}
-
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
