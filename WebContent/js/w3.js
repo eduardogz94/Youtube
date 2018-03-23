@@ -48,8 +48,7 @@ function log(){
           }) 
           });
       } else {
-         $('logout').style.display = "none";
-         $('user').style.display = data.email;         
+         $('logout').style.display = "none";         
      }
   });
 };
