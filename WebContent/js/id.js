@@ -51,7 +51,7 @@ function login() {
 	wrapper.post('/Login',{email:email, password:password},{'Content-Type':'application/json'}).then(function(data){
 		if(data.status == (200)) {
 			console.log(data);
-			window.location.href = "./userindex.html";
+			window.location.href = "./index.html";
 			alert("Log in successful")
 		}else {
 			console.log(data);

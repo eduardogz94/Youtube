@@ -37,14 +37,14 @@ function log(){
     var xhr = new XHR();
     xhr.get('./Login',{},{}).then((data)=>{
        console.log(data.response);
-         $('user').textContent = "Welcome :"+data.email;
      if (data.response != "not logged in"){
          $('login').style.display = "none";
          $('register').style.display = "none";
+         $('user').textContent = "Welcome :"+data.email;
          $('logout').addEventListener('click', function() {
           xhr.get('./Logout',{},{}).then((data)=> {
             window.location.href = "./index.html";
-            alert("you have logged out");
+              alert("you have logged out");
           }) 
           });
       } else {

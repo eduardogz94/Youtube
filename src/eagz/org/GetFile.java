@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import eagz.org.utilities.Database;
+import eagz.org.utilities.PropertiesReader;
 
 @WebServlet("/GetFile")
 public class GetFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Database db = new Database();
+	private PropertiesReader prop = new PropertiesReader();
 
     public GetFile() {
         super();
@@ -28,7 +30,8 @@ public class GetFile extends HttpServlet {
         String name = request.getParameter("filename");
         
         response.setHeader("Content-disposition","attachment; filename="+name);
-        File my_file = new File("./WebContent/videos"+"/"+name);
+        File my_file = new File(prop.getValue("baseDir")+"/"+name);
+        System.out.println(my_file);
         
         if (db.checkVideo(name)) {
         OutputStream out = response.getOutputStream();

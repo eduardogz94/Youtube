@@ -10,7 +10,7 @@ public class PropertiesReader {
 	private Properties prop = new Properties();
 	private InputStream input = null;
 	
-	private PropertiesReader() {
+	public PropertiesReader() {
 		try {
 			input = new FileInputStream("/"+ System.getProperty("user.dir")+"/config.properties");
 			prop.load(input);

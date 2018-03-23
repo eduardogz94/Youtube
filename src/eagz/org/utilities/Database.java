@@ -99,6 +99,7 @@ public class Database {
 			this.pstmt.setString(3, filename);
 			this.pstmt.setString(4, descripcio);
 			this.rs = this.pstmt.executeQuery();
+			System.out.println("New video uploaded");
 			state = this.rs.next();
 		} catch (SQLException e) {
 		e.printStackTrace();

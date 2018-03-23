@@ -61,8 +61,8 @@ public class Signup extends HttpServlet {
  		if(session.isNew()) {
  			if(db.checkSign(email)) {
  		    	db.newAccount(name,lastname,username,password,email);
+ 		    	storeValue(name, lastname, email,username, password, session);
  		    	json.put("response", "signup Finished").put("status", "200");
- 		    	session.invalidate();
  			}else {
  		    	json.put("response", "email already used").put("status", "400");
  				session.invalidate(); 
@@ -70,8 +70,8 @@ public class Signup extends HttpServlet {
  		out.println(json.toString());
  		}
    }   
-}		
-/*	private void storeValue(String name, String lastname,String password, String username,String email, HttpSession session) {
+    
+	private void storeValue(String name, String lastname,String password, String username,String email, HttpSession session) {
 		if(email == null) {
 			session.setAttribute("name", "");
 			session.setAttribute("lastname", "");
@@ -90,4 +90,3 @@ public class Signup extends HttpServlet {
 	}
 
 }
-*/

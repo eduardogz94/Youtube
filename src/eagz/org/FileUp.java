@@ -41,6 +41,7 @@ public class FileUp extends HttpServlet {
 			try {
 				if(file != null) {
 					db.newVideo(file.getName(), getFileName(file), "descrip");
+					System.out.println(file.getName()+ getFileName(file)+ "descrip");
 					os = new FileOutputStream(prop.getValue("baseDir") + "/" + this.getFileName(file));
 					int read = 0;
 					byte[] bytes = new byte[1024];
