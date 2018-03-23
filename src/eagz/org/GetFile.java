@@ -11,27 +11,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import eagz.org.utilities.Database;
+
 @WebServlet("/GetFile")
 public class GetFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Database db = new Database();
 
     public GetFile() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Find this file id in database to get file name, and file type
-    	
-        // You must tell the browser the file type you are going to send
-        // for example application/pdf, text/plain, text/html, image/jpg
-        response.setContentType("file");
-
-        // Assume file name is retrieved from database
-        String name = request.getParameter("name");
-        response.setHeader("Content-disposition","attachment; filename="+name);
-        File my_file = new File("./videos"+"/"+name);
-        System.out.println(my_file);
+		
+    	response.setContentType("file");
+        String name = request.getParameter("filename");
         
+        response.setHeader("Content-disposition","attachment; filename="+name);
+        File my_file = new File("./WebContent/videos"+"/"+name);
+        
+        if (db.checkVideo(name)) {
         OutputStream out = response.getOutputStream();
         FileInputStream in = new FileInputStream(my_file);
         
@@ -43,5 +42,6 @@ public class GetFile extends HttpServlet {
         
         	in.close();
         out.flush();
-	}
+        }
+      }
 }

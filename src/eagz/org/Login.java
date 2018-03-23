@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import eagz.org.utilities.Database;
+import eagz.org.utilities.Encrypt;
 
 
 /**
@@ -22,6 +23,7 @@ import eagz.org.utilities.Database;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Encrypt md;
 	
     public Login() {
         super();
@@ -32,7 +34,7 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) {
-			json.put("response", "not logged in").put("status", "200");
+			json.put("response", "not logged in").put("status", "403");
 			session.invalidate();
 		} else {
 			json.put("status", "200")
@@ -53,10 +55,10 @@ public class Login extends HttpServlet {
 		Database db = new Database();
 		if(session.isNew()) {
 			String email = reqBody.getString("email"); String pass = reqBody.getString("password");
-			if(db.checkUser(email,pass) == true) {
+			md = new Encrypt(pass);
+			if(db.checkUser(email,md.returnEncrypt()) == true) {
 				if (db.checkAdmin(email)) {
-					storeValue(email, pass
-							, session);
+					storeValue(email, pass, session);
 					json.put("status", "200").put("response", "admin");
 				}else {
 					storeValue(email, pass, session);
@@ -71,7 +73,7 @@ public class Login extends HttpServlet {
 		}out.println(json.toString());
 	}		
 	
-	public void storeValue(String email, String password,HttpSession session) {
+	public void storeValue(String email, String password ,HttpSession session) {
 		if(email == null) {
 			session.setAttribute("email", "");
 			session.setAttribute("password", "");

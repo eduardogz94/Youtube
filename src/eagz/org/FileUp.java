@@ -15,13 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import eagz.org.utilities.Database;
+import eagz.org.utilities.PropertiesReader;
 
 @MultipartConfig()
 @WebServlet("/FileUp")
 
 public class FileUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private PropertiesReader prop = PropertiesReader.getInstance();
+	private Database db = new Database();
+	OutputStream os = null;
+	
     public FileUp() {
         super();
     }
@@ -34,20 +38,15 @@ public class FileUp extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			Part file = request.getPart("file");
 			InputStream filecontent = file.getInputStream();
-			OutputStream os = null;
 			try {
 				if(file != null) {
-				Database db = new Database();
-				db.newVideo(file.getName(), getFileName(file), "a");
-				
-				String baseDir = "./videos";
-				os = new FileOutputStream(baseDir + "/" + this.getFileName(file));
-				int read = 0;
-				byte[] bytes = new byte[1024];
-
-				while ((read = filecontent.read(bytes)) != -1) {
-					os.write(bytes, 0, read);
-				}
+					db.newVideo(file.getName(), getFileName(file), "descrip");
+					os = new FileOutputStream(prop.getValue("baseDir") + "/" + this.getFileName(file));
+					int read = 0;
+					byte[] bytes = new byte[1024];
+					while ((read = filecontent.read(bytes)) != -1) {
+						os.write(bytes, 0, read);
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -60,7 +59,6 @@ public class FileUp extends HttpServlet {
 				}
 			}
 	}
-
 	// Esta funcion permite obtener el nombre del archivo
 	private String getFileName(Part part) {
 		for (String content : part.getHeader("content-disposition").split(";")) {
@@ -70,4 +68,4 @@ public class FileUp extends HttpServlet {
 		}
 		return null;
 	}
-}	
+}

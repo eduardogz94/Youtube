@@ -24,6 +24,15 @@ function upload () {
 
 function download () {
 	file = $("downfile").value;
-	var url = "./GetFile?name="+ file;
-	var downloadWindow = window.open(url);
+	var url = "./GetFile?filename="+ file;
+	console.log(url);
+
+	xhr.open("GET",url,true);			
+	xhr.send();
+
+	xhr.onreadystatechange = function () {
+		if (xhr.status === 200 && xhr.readyState === 4) {
+			$("stream").src =  './videos/'+file;
+	}
+	}
 }

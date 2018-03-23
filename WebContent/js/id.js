@@ -1,4 +1,5 @@
 var wrapper = new XHR();
+var w3 = {};
 
 function $(id) {
 	return document.getElementById(id);
@@ -74,9 +75,4 @@ function logout() {
 	}).catch(function(error) {
 		console.log(error);
 		});
-}
-
-function is_logged() {
-	wrapper.get('./Login',{},{'Content-Type':'application/x-www-form-urlencoded'}).then((data) => {
-	});
 }

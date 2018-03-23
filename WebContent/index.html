@@ -3,33 +3,32 @@
 		 <head>
 			 <meta charset="ISO-8859-1">
 			 <title>Ejemplo sesion</title>
-		 	 <div w3-include-html="./layout/layout.html"></div>
-		 	 <link rel="stylesheet" href="./layout/style.css"/>
+		 	 <div w3-include-html="../layout/layout.html"></div>
+		 	 <link rel="stylesheet" href="../layout/style.css"/>
 		 </head>
 	 
 	 <body>	
 		<div class="container">
 			 <div>
-		        <div> 
-			 	 	 	<h1 style="text-align: center;">Welcome</h1>
-			 	 	 	<hr/>
-			 				<input type="file" id="upfile">
-				 </div>
+			 	  	<h1 style="text-align: center;">Welcome</h1>
+			 	  	<hr/>
+			 	  	<div>
+			 			<input type="file" class="btn btn-danger"  id="upfile">
+					</div>
 			</div>
 
 			<div>
 		         <div>
-		             <ul>
-		            	 <button onclick="upload()">Upload a video</button>
-				 	 	 <h3 style="text-align: center;" id="uploadStatus"></h3>
-				 	  <hr/>
-				 	 	 <input type="text" id="downfile"></input>
-				 	 	 <button onclick="download()">Search a video</button>	
-		          	 </ul>	
+		            <button type="button" class="btn" onclick="upload()">Upload</button>
+				    <h3 style="text-align: center;" id="uploadStatus"></h3>
+				 	<hr>
+				 	<div>
+		          	 	 <video width="468px" height="150px" id="stream" controls></video>
+		          	 </div>	
 		         </div>
 		     </div>
 		 </div>
-	</body> 
+</body> 
 		  
 		  <script src ='js/xhrPromises.js'></script>
 		  <script src="js/w3.js"></script>

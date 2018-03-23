@@ -1,28 +1,40 @@
-<link rel="stylesheet" href="/layout/layout.css">
+<link rel="stylesheet" href="../layout/layout.css">
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="./libs/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../libs/bootstrap-3.3.7/dist/css/bootstrap.min.css">
 
 <!-- jQuery library -->
-<script src="./libs/jquery/3.3.1/jquery.js"></script>
+<script src="../libs/jquery/jquery-3.3.1.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="./libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="../libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
    
-     <div id="header">
+     <div width="1368px" id="header">
        <nav class="navbar navbar-inverse">
-           <a class="navbar-brand" href="./index.html">Youtube WEB II</a>
+           <a class="navbar-brand" href="./index.html">Youtube</a>
            <div class="nav navbar-nav">
-             <li class="active"><a href="#">Home</a></li>
+             <li id="home" class="active"><a href="#">Home</a></li>
            </div>
-       
-           <div class="nav navbar-nav navbar-right">
-             <li ><a href="./signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-             <li><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-           </div>
-       </nav>
-     </div>
+          
+       <div class="col-lg-6">
+         <div >
+           <input type="text" class="form-control" id="downfile" placeholder="Search" >
+         </div>
+       </div>
+  
+       <div>
+         <button class="btn btn-default" onclick="download()">Search</button>
+          <div class="nav navbar-nav navbar-right">
+            <li id="register"><a href="./signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li id="login"><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li id="logout"><a href="./index.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <h3 id="user"><span></span></li>
+          </div>
+       </div> 
+      
+      </nav>
+    </div>
    
    
      <div id="footer">

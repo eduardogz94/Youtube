@@ -18,7 +18,7 @@ public class Encrypt {
 		BigInteger number = new BigInteger(1,pDigest);
 		hastext = number.toString(16);
 	}
-	public String returnEncript() {
+	public String returnEncrypt() {
 		return hastext;	
 	}
 }

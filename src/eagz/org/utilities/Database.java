@@ -77,12 +77,24 @@ public class Database {
 		return state;
 	}
 	
+	public boolean checkVideo(String filename) {
+		boolean state = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_checkVideo"));
+			this.pstmt.setString(1, filename);
+			this.rs = this.pstmt.executeQuery();
+			state = this.rs.next();
+		} catch (SQLException e) {
+		e.printStackTrace();
+		}		
+		return state;
+	}
+	
 	public boolean newVideo(String name, String filename,String descripcio) {
 		boolean state = false;
 		try {
-			String url = "./videos";
 			this.pstmt = con.prepareStatement(prop.getValue("query_newVideo"));
-			this.pstmt.setString(1, url);
+			this.pstmt.setString(1, prop.getValue("baseDir"));
 			this.pstmt.setString(2, name);
 			this.pstmt.setString(3, filename);
 			this.pstmt.setString(4, descripcio);
@@ -102,7 +114,7 @@ public class Database {
 			this.pstmt.setString(1,name);
 			this.pstmt.setString(2,lastname);
 			this.pstmt.setString(3,username);
-			this.pstmt.setString(4,password);
+			this.pstmt.setString(4,md.returnEncrypt());
 			this.pstmt.setString(5,email);
 			this.rs = this.pstmt.executeQuery();
 			state = this.rs.next();
@@ -127,6 +139,9 @@ public class Database {
 		return state;
 	}
 	
+	public void download(String name) {
+		
+	}
 	public void closeCon() {
 		try {
 			this.con.close();
