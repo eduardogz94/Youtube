@@ -37,7 +37,7 @@ function log(){
     var xhr = new XHR();
     xhr.get('./Login',{},{}).then((data)=>{
        console.log(data.response);
-         $('user').textContent = data.email;
+         $('user').textContent = "Welcome :"+data.email;
      if (data.response != "not logged in"){
          $('login').style.display = "none";
          $('register').style.display = "none";

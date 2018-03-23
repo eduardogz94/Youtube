@@ -11,7 +11,10 @@
 	align-content: center;
 }
 
-
+#user h3 {
+	font-family: lulo clean;
+	font-style: 25px;
+}
 #upfile{
 	align-content: center;
 }
