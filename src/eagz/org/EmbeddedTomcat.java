@@ -16,6 +16,7 @@ public class EmbeddedTomcat {
 	static Logout logout = new Logout();
 	static FileUp fileUp = new FileUp();
 	static GetFile getFile = new GetFile();
+	static Stream stream = new Stream();
 	
 	public static void main(String[] args) throws IOException, LifecycleException, ServletException {
 
@@ -43,9 +44,11 @@ public class EmbeddedTomcat {
 		Tomcat.addServlet(ctxt, "FileUp", fileUp );
 		ctxt.addServletMappingDecoded("/FileUp", "FileUp");
 		
-		
 		Tomcat.addServlet(ctxt, "GetFile", getFile);
 		ctxt.addServletMappingDecoded("/GetFile", "GetFile");
+		
+		Tomcat.addServlet(ctxt, "Stream", stream);
+		ctxt.addServletMappingDecoded("/Stream", "Stream");
 		
 		ctxt.setAllowCasualMultipartParsing(true);
 		

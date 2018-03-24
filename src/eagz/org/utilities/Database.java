@@ -140,9 +140,6 @@ public class Database {
 		return state;
 	}
 	
-	public void download(String name) {
-		
-	}
 	public void closeCon() {
 		try {
 			this.con.close();

@@ -3,18 +3,3 @@
 	align-content: center;
 }
 
-.text-justify {
-	text-align: justify;
-}
-
-.file{
-	align-content: center;
-}
-#upfile{
-	align-content: center;
-	display: inline;	
-}
-
-#upfile .btn.btn-danger input{
-	align-content: center;
-}

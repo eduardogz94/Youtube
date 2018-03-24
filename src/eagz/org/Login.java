@@ -40,9 +40,7 @@ public class Login extends HttpServlet {
 			json.put("status", "200")
 				.put("response", "logged in")
 				.put("password", session.getAttribute("password"))
-				.put("email", session.getAttribute("email"))
-				.put("username", session.getAttribute("username"))
-				.put("name", session.getAttribute("name"));
+				.put("email", session.getAttribute("email"));
 		}
 		out.print(json.toString());
 	}
@@ -54,7 +52,8 @@ public class Login extends HttpServlet {
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		Database db = new Database();
 		if(session.isNew()) {
-			String email = reqBody.getString("email"); String pass = reqBody.getString("password");
+			String email = reqBody.getString("email"); 
+			String pass = reqBody.getString("password");
 			md = new Encrypt(pass);
 			if(db.checkUser(email,md.returnEncrypt()) == true) {
 				if (db.checkAdmin(email)) {

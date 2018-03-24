@@ -12,21 +12,27 @@
 			 <div>
 			 	  	<h1 style="text-align: center;">Suggestions</h1>
 			 	  	<hr/>
-			 	  	<div>
-			 			<input type="file" class="btn btn-danger"  id="upfile">
+			 	  	<div class="col-md-3">
+			 			<input type="file" class="btn btn-default"  id="upfile" style="margin-left: 322px;">
 					</div>
 			</div>
 
-			<div>
-		         <div>
-		            <button type="button" class="btn btn-primary" onclick="upload()" style="margin-top: 10px;">Upload</button>
+			
+		         <div class="col-md-3">
+		            <button id="up-but" type="button" class="btn btn-primary" onclick="upload()" style="margin-left: 330px;">Upload</button>
 				    <h3 style="text-align: center;" id="uploadStatus"></h3>
-				 	<hr>
 				 	<div>
 		          	 	 <video width="468px" height="150px" id="stream" controls></video>
 		          	 </div>	
 		         </div>
-		     </div>
+		     
+		     	<div class="col-md-9">
+		     		<input type="text" name="comments"></input>
+		     	</div>
+
+		     	<div class="col-md-3 wells">
+		     		<video width="468px" height="150px" id="stream1" ></video>
+		     	</div>
 		 </div>
 </body> 
 		  

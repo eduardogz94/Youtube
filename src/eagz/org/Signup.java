@@ -34,11 +34,6 @@ public class Signup extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        Database db = new Database();
- 		String test = "eg";
- 		out.println(db.checkSign(test));
-    	System.out.println(db.checkSign(test));
     }
 
 	/**
@@ -61,7 +56,7 @@ public class Signup extends HttpServlet {
  		if(session.isNew()) {
  			if(db.checkSign(email)) {
  		    	db.newAccount(name,lastname,username,password,email);
- 		    	storeValue(name, lastname, email,username, password, session);
+ 		    	storeValue(password,email,  session);
  		    	json.put("response", "signup Finished").put("status", "200");
  			}else {
  		    	json.put("response", "email already used").put("status", "400");
@@ -71,21 +66,16 @@ public class Signup extends HttpServlet {
  		}
    }   
     
-	private void storeValue(String name, String lastname,String password, String username,String email, HttpSession session) {
+	private void storeValue(String email,String password, HttpSession session) {
 		if(email == null) {
-			session.setAttribute("name", "");
-			session.setAttribute("lastname", "");
-			session.setAttribute("username", "");
-			session.setAttribute("password", "");
 			session.setAttribute("email", "");
+			session.setAttribute("password", "");
 		} 
 		
 		else {
-			session.setAttribute("name", name);
-			session.setAttribute("lastname", lastname);
-			session.setAttribute("username", username);
-			session.setAttribute("password", password);
 			session.setAttribute("email", email);
+			session.setAttribute("password", password);
+			
 		}
 	}
 

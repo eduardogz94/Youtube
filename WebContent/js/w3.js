@@ -36,11 +36,11 @@ function includeHTML() {
 function log(){
     var xhr = new XHR();
     xhr.get('./Login',{},{}).then((data)=>{
-       console.log(data.response);
+       console.log(data.response + " email: " + data.email + " pass: " + data.password);
      if (data.response != "not logged in"){
          $('login').style.display = "none";
          $('register').style.display = "none";
-         $('user').textContent = "Welcome :"+data.email;
+         $('user').textContent = "User ->"+data.email;
          $('logout').addEventListener('click', function() {
           xhr.get('./Logout',{},{}).then((data)=> {
             window.location.href = "./index.html";
@@ -48,7 +48,9 @@ function log(){
           }) 
           });
       } else {
-         $('logout').style.display = "none";         
+         $('logout').style.display = "none";
+         $('upfile').style.display = "none";
+         $('up-but').style.display = "none";         
      }
   });
 };

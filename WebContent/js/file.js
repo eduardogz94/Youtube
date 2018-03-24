@@ -23,16 +23,17 @@ function upload () {
 
 
 function download () {
-	file = $("downfile").value;
+	file = $("downfile").value + ".mp4";
 	var url = "./GetFile?filename="+ file;
 	console.log(url);
+	var downloadWindow = open(url);
 
-	xhr.open("GET",url,true);			
+	xhr.open("GET",url,true);
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
-			$("stream").src =  './videos/'+file;
+			$("stream").src =  './Stream?filename='+file;
 	}
 	}
 }
