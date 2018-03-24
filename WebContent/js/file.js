@@ -27,6 +27,8 @@ function download () {
 	var url = "./GetFile?filename="+ file;
 	console.log(url);
 	var downloadWindow = open(url);
+	$('stream').autostart = true;
+	$('stream').controls = true;
 
 	xhr.open("GET",url,true);
 	xhr.send();
@@ -34,6 +36,53 @@ function download () {
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
 			$("stream").src =  './Stream?filename='+file;
-	}
+		}
 	}
 }
+
+function vid(){
+	var url1 = "./GetFile?filename="+ "5mb.mp4";
+	var url2 = "./GetFile?filename="+ "10mb.mp4";
+
+	xhr.open("GET",url1,true);
+	xhr.open("GET",url2,true);
+	xhr.send();
+
+	xhr.onreadystatechange = function () {
+		if (xhr.status === 200 && xhr.readyState === 4) {
+			$("stream1").src =  './Stream?filename='+ "5mb.mp4";
+			$("stream2").src =  './Stream?filename='+ "10mb.mp4";
+		}
+	}
+}
+
+function click1(){
+	var url = "./GetFile?filename="+ "5mb.mp4";
+	xhr.open("GET",url,true);
+	xhr.send();
+
+	xhr.onreadystatechange = function () {
+		if (xhr.status === 200 && xhr.readyState === 4) {
+			$("stream").src =  './Stream?filename='+ "5mb.mp4";
+		}
+	}
+	$('stream').autostart = true;
+	$('stream').controls = true;
+}
+
+function click2(){
+	var url = "./GetFile?filename="+ "10mb.mp4";
+	xhr.open("GET",url,true);
+	xhr.send();
+
+	xhr.onreadystatechange = function () {
+		if (xhr.status === 200 && xhr.readyState === 4) {
+			$("stream").src =  './Stream?filename='+ "10mb.mp4";
+		}
+	}
+	$('stream').autostart = true;
+	$('stream').controls = true;
+}
+
+
+vid();

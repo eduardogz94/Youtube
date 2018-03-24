@@ -16,10 +16,6 @@ import org.json.JSONObject;
 import eagz.org.utilities.Database;
 import eagz.org.utilities.Encrypt;
 
-
-/**
- * Servlet implementation class test1
- */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -59,16 +55,20 @@ public class Login extends HttpServlet {
 				if (db.checkAdmin(email)) {
 					storeValue(email, pass, session);
 					json.put("status", "200").put("response", "admin");
+					System.out.println("Admin-> " + email);
 				}else {
 					storeValue(email, pass, session);
 					json.put("status", "200").put("response", "user");
+					System.out.println("User-> " + email);
 				}
 			}else {
 				json.put("response", "Wrong email or password").put("status", "400");
 				session.invalidate();
+				System.out.println("Wrong data --");
 			}
 		}else {
 			json.put("response", "you're logged in").put("status", "400");
+			System.out.println("Already log --");
 		}out.println(json.toString());
 	}		
 	

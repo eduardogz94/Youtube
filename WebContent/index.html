@@ -12,26 +12,33 @@
 			 <div>
 			 	  	<h1 style="text-align: center;">Suggestions</h1>
 			 	  	<hr/>
-			 	  	<div class="col-md-3">
-			 			<input type="file" class="btn btn-default"  id="upfile" style="margin-left: 322px;">
+			 	  	<div class="col-sm-3">
+			 			<input type="file" class="btn btn-default"  id="upfile">
 					</div>
 			</div>
 
 			
-		         <div class="col-md-3">
-		            <button id="up-but" type="button" class="btn btn-primary" onclick="upload()" style="margin-left: 330px;">Upload</button>
+		         <div class="col-sm-3">
+		            <button id="up-but" type="button" class="btn btn-primary" onclick="upload()" style="margin-left: -170px">Upload</button>
 				    <h3 style="text-align: center;" id="uploadStatus"></h3>
-				 	<div>
-		          	 	 <video width="468px" height="150px" id="stream" controls></video>
-		          	 </div>	
 		         </div>
 		     
-		     	<div class="col-md-9">
-		     		<input type="text" name="comments"></input>
+		     	<div class="col-sm-3">
+	         	 	 <video width="468px" height="150px" id="stream"></video>	
+		     	
 		     	</div>
 
-		     	<div class="col-md-3 wells">
-		     		<video width="468px" height="150px" id="stream1" ></video>
+		     	<div class="col-sm-3">
+		     		<input type="text" class="btn btn-default" name="comments" placeholder="Comment" style="margin-left: 100px"></input>
+		     	
+		     	</div>
+
+		     	<div class="col-sm-6" style="margin-left: -190px; margin-top: -100px;">
+		     		
+		     			<ul><video width="350px" height="150px" id="stream1" onclick="click1();"></video></ul>
+		     		    <ul><video width="350px" height="150px" id="stream2" onclick="click2();"></video></ul>
+		     		
+
 		     	</div>
 		 </div>
 </body> 

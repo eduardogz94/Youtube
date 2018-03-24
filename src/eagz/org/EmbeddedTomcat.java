@@ -23,15 +23,15 @@ public class EmbeddedTomcat {
 		Integer port = 8080;
 		Tomcat tomcat = new Tomcat();
 		Context ctxt = null;
+		
 		Connector con = new Connector();
 		con.setPort(port);
 		con.setMaxPostSize(60000000);
 		tomcat.setConnector(con);
+		
 		String web_app = "WebContent";
-		System.out.println("Tomcat levantara en el puerto: " + port);
 		ctxt = tomcat.addWebapp("/", System.getProperty("user.dir") + "\\" +web_app);
-		System.out.printf("/", System.getProperty("user.dir") + "\\" +web_app);	
-
+		
 		Tomcat.addServlet(ctxt, "Login", login);
 		ctxt.addServletMappingDecoded("/Login", "Login");
 		

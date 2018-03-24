@@ -31,7 +31,7 @@ public class GetFile extends HttpServlet {
         
         response.setHeader("Content-disposition","attachment; filename="+name);
         File my_file = new File(prop.getValue("baseDir")+"/"+name);
-        System.out.println("getfile " +my_file);
+        System.out.println("Get-> " +my_file);
         	
         if (db.checkVideo(name)) {
         OutputStream out = response.getOutputStream();

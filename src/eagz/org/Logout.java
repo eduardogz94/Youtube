@@ -27,17 +27,14 @@ public class Logout extends HttpServlet {
 		JSONObject json = new JSONObject();
 		if(session.isNew()) { 
 			json.put("response","You have logged out").put("status","200");
+			System.out.println("Logout --");
 			session.invalidate();
 		}
 		else { 
 			json.put("response", "You're not logged in").put("status", "400");
+			System.out.println("Not logged --");
 			session.invalidate();
 		}
 		out.print(json.toString());
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 }

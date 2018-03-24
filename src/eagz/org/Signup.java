@@ -15,30 +15,14 @@ import org.json.JSONObject;
 
 import eagz.org.utilities.Database;
 
-/**
- * Servlet implementation class Signup
- */
 @WebServlet("/Signup")
 public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Signup() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -57,9 +41,12 @@ public class Signup extends HttpServlet {
  			if(db.checkSign(email)) {
  		    	db.newAccount(name,lastname,username,password,email);
  		    	storeValue(password,email,  session);
- 		    	json.put("response", "signup Finished").put("status", "200");
+ 		    	json.put("response", "signup finished").put("status", "200");
+ 		    	System.out.println("Register --");
+ 		    	session.invalidate();
  			}else {
  		    	json.put("response", "email already used").put("status", "400");
+ 		    	System.out.println("Fail register --");
  				session.invalidate(); 
  			}
  		out.println(json.toString());
@@ -78,5 +65,4 @@ public class Signup extends HttpServlet {
 			
 		}
 	}
-
 }

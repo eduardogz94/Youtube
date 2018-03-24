@@ -50,7 +50,7 @@ function log(){
       } else {
          $('logout').style.display = "none";
          $('upfile').style.display = "none";
-         $('up-but').style.display = "none";         
+         $('up-but').style.display = "none";      
      }
   });
 };
