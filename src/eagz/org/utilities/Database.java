@@ -24,7 +24,7 @@ public class Database {
 		}
 	}
 
-	public  boolean checkUser(String email, String password) {
+	public boolean checkUser(String email, String password) {
 		boolean state = false;
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query_checkuser"));
@@ -32,7 +32,6 @@ public class Database {
 			this.pstmt.setString(2,password);
 			this.rs = pstmt.executeQuery();
 			state = this.rs.next();
-			System.out.println("user: "+ state);
 			} catch (Exception e) {
 				e.getStackTrace();
 			}
@@ -99,12 +98,27 @@ public class Database {
 			this.pstmt.setString(3, filename);
 			this.pstmt.setString(4, descripcio);
 			this.rs = this.pstmt.executeQuery();
-			System.out.println("New video uploaded");
 			state = this.rs.next();
 		} catch (SQLException e) {
 		e.printStackTrace();
 		}		
 		return state;
+	}
+	
+	
+	public boolean commentVideo(int commentId, int vidId,int id, String comment) {
+		boolean st = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_newComment"));
+			this.pstmt.setInt(1, commentId);
+			this.pstmt.setInt(2, vidId);
+			this.pstmt.setInt(3, id);
+			this.pstmt.setString(4, comment);
+			this.pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		}
+		return st;
 	}
 	
 	public boolean newAccount(String name, String lastname, String username, String password,String email ) {
@@ -138,6 +152,38 @@ public class Database {
 			e.printStackTrace();
 		}
 		return state;
+	}
+	
+	public int userId(String email) {
+		int id = 0;
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_getId"));
+		    this.pstmt.setString(1, email);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					id = this.rs.getInt("id");
+				return id;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return id;
+	}
+	
+	public int videoId(String filename) {
+		int id = 0;
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_videoId"));
+		    this.pstmt.setString(1,filename);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					id = this.rs.getInt("media_id");
+				return id;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return id;
 	}
 	
 	public void closeCon() {

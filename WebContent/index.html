@@ -19,7 +19,7 @@
 
 	         <div class="col-sm-3"  >
 		            <button id="up-but" type="button" class="btn btn-primary" onclick="upload()" style="margin-left: -170px">Upload</button>
-				    <h3 style="text-align: center;" id="uploadStatus"></h3>
+				    <h3 style="text-align: right;" id="uploadStatus"></h3>
 		         </div>
 		     
 		     	<div class="col-sm-3">
@@ -29,20 +29,20 @@
 		     	</div>
 
 		     	<div class="col-md-3">
-		     		<textarea type="text" id="comment" class="btn btn-default" name="comments" placeholder="Comment" style="margin-left: 200px; margin-top: 50px;"></textarea>
+		     		<textarea type="text" id="comment" class="btn btn-default" name="comments" placeholder="Comment" style="margin-left: 200px; margin-top: 50px;" onclick="comment();"></textarea>
 		     	
 		     	</div>
 				
-		     	<div class="col-md-4 border-danger well" style="margin-top: -100px;">
+		     	<div class="col-md-4 border-danger well" style="margin-top: -150px;">
 		     		<h1><span class="label label-primary">Suggestions</span></h1>		
 		     			<ul><video style="margin-left: -50px" width="350px" height="150px" id="stream1" onclick="click1();"></video></ul>
 		     		    <ul><video style="margin-left: -50px" width="350px" height="150px" id="stream2" onclick="click2();"></video></ul>
 		     	</div>
 		 </div>
 </body> 
-		  
 		  <script src ='js/xhrPromises.js'></script>
 		  <script src="js/w3.js"></script>
+		  <script src="js/comments.js"></script>
 	   	  <script src="js/id.js"></script>
 	   	  <script src ='js/file.js'></script>
  </html>

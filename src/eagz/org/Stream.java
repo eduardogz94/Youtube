@@ -25,6 +25,7 @@ public class Stream extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletOutputStream out = response.getOutputStream();
 		String name = request.getParameter("filename");
+		
 		InputStream in = new FileInputStream (prop.getValue("baseDir")+ "/" + name);
 		System.out.println("Streaming-> "+ name);
 		String mimeType = "video/mp4";
@@ -37,5 +38,5 @@ public class Stream extends HttpServlet {
 		}
 		in.close();
 		out.close();		
-		}
+		}	
 }

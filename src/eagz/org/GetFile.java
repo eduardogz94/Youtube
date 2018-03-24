@@ -25,15 +25,12 @@ public class GetFile extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
     	response.setContentType("file");
         String name = request.getParameter("filename");
-        
         response.setHeader("Content-disposition","attachment; filename="+name);
-        File my_file = new File(prop.getValue("baseDir")+"/"+name);
-        System.out.println("Get-> " +my_file);
-        	
+        File my_file = new File(prop.getValue("baseDir")+"/"+name);	
         if (db.checkVideo(name)) {
+        System.out.println("Get-> " +my_file);
         OutputStream out = response.getOutputStream();
         FileInputStream in = new FileInputStream(my_file);
         
@@ -46,5 +43,5 @@ public class GetFile extends HttpServlet {
         	in.close();
         out.flush();
         }
-      }
+    }
 }

@@ -50,14 +50,15 @@ public class Login extends HttpServlet {
 		if(session.isNew()) {
 			String email = reqBody.getString("email"); 
 			String pass = reqBody.getString("password");
+			int userId = db.userId(email);
 			md = new Encrypt(pass);
 			if(db.checkUser(email,md.returnEncrypt()) == true) {
 				if (db.checkAdmin(email)) {
-					storeValue(email, pass, session);
+					storeValue(email, pass, userId, session);
 					json.put("status", "200").put("response", "admin");
 					System.out.println("Admin-> " + email);
 				}else {
-					storeValue(email, pass, session);
+					storeValue(email, pass,userId, session);
 					json.put("status", "200").put("response", "user");
 					System.out.println("User-> " + email);
 				}
@@ -69,16 +70,19 @@ public class Login extends HttpServlet {
 		}else {
 			json.put("response", "you're logged in").put("status", "400");
 			System.out.println("Already log --");
-		}out.println(json.toString());
+		}
+		out.println(json.toString());
 	}		
 	
-	public void storeValue(String email, String password ,HttpSession session) {
+	public void storeValue(String email, String password,int userId,HttpSession session) {
 		if(email == null) {
 			session.setAttribute("email", "");
 			session.setAttribute("password", "");
+			session.setAttribute("id", "");
 		} else {
 			session.setAttribute("email", email);
 			session.setAttribute("password", password);
+			session.setAttribute("id", userId);
 		}
 	}
 }

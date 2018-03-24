@@ -36,7 +36,6 @@ function includeHTML() {
 function log(){
     var xhr = new XHR();
     xhr.get('./Login',{},{}).then((data)=>{
-       console.log(data.response + " email: " + data.email + " pass: " + data.password);
      if (data.response != "not logged in"){
          $('login').style.display = "none";
          $('register').style.display = "none";
