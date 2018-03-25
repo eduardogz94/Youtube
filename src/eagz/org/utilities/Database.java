@@ -161,13 +161,31 @@ public class Database {
 		    this.pstmt.setString(1, email);
 			this.rs = this.pstmt.executeQuery();
 				while (this.rs.next()) 		
-					id = this.rs.getInt("id");
+					id = this.rs.getInt("id_user");
 				return id;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		return id;
+	}
+	
+	public int commentId(int id) {
+		int commentId = 0;
+		int idc = 0;
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_commentId"));
+		    this.pstmt.setInt(1, id);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					commentId = this.rs.getInt("comment_id");
+					idc = commentId + 1;
+				return idc;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return idc;
 	}
 	
 	public int videoId(String filename) {
