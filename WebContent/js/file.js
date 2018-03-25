@@ -5,7 +5,6 @@ function $(id) {
 var xhr = new XMLHttpRequest();
 var file = "";
 
-
 function upload() {
 	var formData = new FormData($('upfile'));
 	formData.append("file", $("upfile").files[0]);
@@ -20,7 +19,6 @@ function upload() {
 		}
 	}
 }
-
 
 function download() {
 	file = $("downfile").value + ".mp4";
@@ -41,7 +39,7 @@ function download() {
 	}
 }
 
-function vid(){
+function streaming(){
 	var url1 = "./GetFile?filename="+ "5mb.mp4";
 
 	xhr.open("GET",url1,true);
@@ -56,7 +54,7 @@ function vid(){
 	}
 }
 
-function vid1(){
+function streaming1(){
 	var url2 = "./GetFile?filename="+ "10mb.mp4";
 	xhr.open("GET",url2,true);
 	xhr.send();
@@ -66,7 +64,7 @@ function vid1(){
 			$("stream2").src = './Stream?filename='+ "10mb.mp4";
 			$("stream2").setAttribute("filename","10mb.mp4");
 			console.log("Streaming -> " + $("stream2").getAttribute("filename"));
-			vid();	
+			streaming();	
 		}
 	}
 }
@@ -103,5 +101,4 @@ function click2(){
 	$('stream').controls = true;
 }
 
-
-vid1();
+streaming1();

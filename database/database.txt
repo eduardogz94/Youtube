@@ -1,0 +1,132 @@
+
+CREATE SEQUENCE public.tags_tag_id_seq;
+
+CREATE TABLE public.tags (
+                tag_id INTEGER NOT NULL DEFAULT nextval('public.tags_tag_id_seq'),
+                tag_des VARCHAR(15) NOT NULL,
+                CONSTRAINT tags_pk PRIMARY KEY (tag_id)
+);
+
+
+ALTER SEQUENCE public.tags_tag_id_seq OWNED BY public.tags.tag_id;
+
+CREATE SEQUENCE public.type_user_type_id_seq_1;
+
+CREATE TABLE public.type_user (
+                type_id INTEGER NOT NULL DEFAULT nextval('public.type_user_type_id_seq_1'),
+                type_des VARCHAR(20) NOT NULL,
+                CONSTRAINT type_user_pk PRIMARY KEY (type_id)
+);
+
+
+ALTER SEQUENCE public.type_user_type_id_seq_1 OWNED BY public.type_user.type_id;
+
+CREATE SEQUENCE public.media_thumbnail_media_id_seq;
+
+CREATE TABLE public.media_thumbnail (
+                media_id INTEGER NOT NULL DEFAULT nextval('public.media_thumbnail_media_id_seq'),
+                media_url VARCHAR NOT NULL,
+                media_name VARCHAR(20) NOT NULL,
+                media_fileName VARCHAR(25) NOT NULL,
+                media_views INTEGER NOT NULL,
+                media_des VARCHAR(250) NOT NULL,
+                created_at TIMESTAMP NOT NULL,
+                CONSTRAINT media_thumbnail_pk PRIMARY KEY (media_id)
+);
+
+
+ALTER SEQUENCE public.media_thumbnail_media_id_seq OWNED BY public.media_thumbnail.media_id;
+
+CREATE TABLE public.tag_media (
+                media_id INTEGER NOT NULL,
+                tag_id INTEGER NOT NULL,
+                CONSTRAINT tag_media_pk PRIMARY KEY (media_id, tag_id)
+);
+
+
+CREATE SEQUENCE public.app_user_id_user_seq;
+
+CREATE TABLE public.app_user (
+                id_user INTEGER NOT NULL DEFAULT nextval('public.app_user_id_user_seq'),
+                type_id INTEGER NOT NULL,
+                name VARCHAR(30) NOT NULL,
+                lastname VARCHAR(30) NOT NULL,
+                username VARCHAR(15) NOT NULL,
+                password VARCHAR(32) NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT app_user_pk PRIMARY KEY (id_user)
+);
+
+
+ALTER SEQUENCE public.app_user_id_user_seq OWNED BY public.app_user.id_user;
+
+CREATE SEQUENCE public.comments_id_comments_seq;
+
+CREATE TABLE public.comments (
+                comment_id INTEGER NOT NULL DEFAULT nextval('public.comments_id_comments_seq'),
+                media_id INTEGER NOT NULL,
+                id_user INTEGER NOT NULL,
+                created_at TIMESTAMP NOT NULL,
+                comment_text VARCHAR(250) NOT NULL,
+                comment_available BOOLEAN DEFAULT true NOT NULL,
+                CONSTRAINT comments_pk PRIMARY KEY (comment_id)
+);
+
+
+ALTER SEQUENCE public.comments_id_comments_seq OWNED BY public.comments.comment_id;
+
+CREATE TABLE public.likes (
+                id_user INTEGER NOT NULL,
+                media_id INTEGER NOT NULL,
+                CONSTRAINT likes_pk PRIMARY KEY (id_user, media_id)
+);
+
+
+ALTER TABLE public.tag_media ADD CONSTRAINT tags_tag_media_fk
+FOREIGN KEY (tag_id)
+REFERENCES public.tags (tag_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.app_user ADD CONSTRAINT type_user_app_user_fk
+FOREIGN KEY (type_id)
+REFERENCES public.type_user (type_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.likes ADD CONSTRAINT media_user_media_fk
+FOREIGN KEY (media_id)
+REFERENCES public.media_thumbnail (media_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.comments ADD CONSTRAINT media_comments_fk
+FOREIGN KEY (media_id)
+REFERENCES public.media_thumbnail (media_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.tag_media ADD CONSTRAINT media_tag_media_fk
+FOREIGN KEY (media_id)
+REFERENCES public.media_thumbnail (media_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.likes ADD CONSTRAINT app_user_user_media_fk
+FOREIGN KEY (id_user)
+REFERENCES public.app_user (id_user)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.comments ADD CONSTRAINT app_user_comments_fk
+FOREIGN KEY (id_user)
+REFERENCES public.app_user (id_user)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
