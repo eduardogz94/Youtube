@@ -170,22 +170,20 @@ public class Database {
 		return id;
 	}
 	
-	public int commentId(int id) {
-		int commentId = 0;
-		int idc = 0;
+	public int commentId() {
+		int cid = 0;
+		int id = 0;
 		try {
 			this.pstmt = this.con.prepareStatement(prop.getValue("query_commentId"));
-		    this.pstmt.setInt(1, id);
 			this.rs = this.pstmt.executeQuery();
 				while (this.rs.next()) 		
-					commentId = this.rs.getInt("comment_id");
-					idc = commentId + 1;
-				return idc;
+					id = this.rs.getInt("comment_id");
+					cid = id + 1;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		return idc;
+		return cid;
 	}
 	
 	public int videoId(String filename) {

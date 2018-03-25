@@ -29,12 +29,15 @@ public class Comments extends HttpServlet {
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		Database db = new Database();
 		
+		System.out.println("test " +db.commentId());
 		String filename = reqBody.getString("filename");
 		String comment = reqBody.getString("comment"); 
 		String email = (String) request.getSession(false).getAttribute("email");
 		int id = db.userId(email);
 		int videoId = db.videoId(filename);
-		int commentId = db.commentId(videoId);
+		System.out.println(videoId);
+		int commentId = db.commentId();
+		System.out.println(commentId);
 		
 		db.commentVideo(commentId, videoId, id, comment);
 		json.put("status", "200").put("response", "commented");

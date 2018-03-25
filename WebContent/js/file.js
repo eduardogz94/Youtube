@@ -79,6 +79,8 @@ function click1(){
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
 			$("stream").src =  './Stream?filename='+ "5mb.mp4";
+			$("stream").setAttribute("filename","5mb.mp4");
+			console.log("Streaming -> " + $("stream1").getAttribute("filename"));
 		}
 	}
 	$('stream').autostart = true;
@@ -93,6 +95,8 @@ function click2(){
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
 			$("stream").src =  './Stream?filename='+ "10mb.mp4";
+			$("stream").setAttribute("filename","10mb.mp4");
+			console.log("Streaming -> " + $("stream1").getAttribute("filename"));
 		}
 	}
 	$('stream').autostart = true;
