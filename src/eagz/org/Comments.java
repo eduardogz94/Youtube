@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import eagz.org.utilities.Database;
-
 @WebServlet("/Comments")
 public class Comments extends HttpServlet {
 	private static final long serialVersionUID = 1L;

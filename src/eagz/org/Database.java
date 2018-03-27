@@ -1,10 +1,14 @@
-package eagz.org.utilities;
+package eagz.org;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import eagz.org.utilities.Encrypt;
+import eagz.org.utilities.PropertiesReader;
+import eagz.org.utilities.SingleDB;
 
 
 public class Database {
@@ -16,8 +20,9 @@ public class Database {
 	
 	public Database(){
 		try {
-			Class.forName(prop.getValue("dbDriver"));
-			this.con= DriverManager.getConnection(prop.getValue("dbUrl"),prop.getValue("dbUser"),prop.getValue("dbPassword"));
+			SingleDB db = SingleDB.getInstance();
+			Class.forName(db.getDriver());
+			this.con= DriverManager.getConnection(db.getUrl(), db.getUsername(), db.getPassword());
 		}
 		catch(Exception e){
 			e.getStackTrace();

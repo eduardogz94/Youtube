@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import eagz.org.utilities.Database;
-
 @WebServlet("/Likes")
 public class Likes extends HttpServlet {
 	private static final long serialVersionUID = 1L;

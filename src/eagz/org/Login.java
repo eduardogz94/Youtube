@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import eagz.org.utilities.Database;
 import eagz.org.utilities.Encrypt;
 
 @WebServlet("/Login")
