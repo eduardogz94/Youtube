@@ -33,27 +33,5 @@ function includeHTML() {
   }
 }
 
-function log(){
-    var xhr = new XHR();
-    xhr.get('./Login',{},{}).then((data)=>{
-     if (data.response != "not logged in"){
-         $('login').style.display = "none";
-         $('register').style.display = "none";
-         $('user').textContent = "User ->"+data.email;
-         $('logout').addEventListener('click', function() {
-          xhr.get('./Logout',{},{}).then((data)=> {
-            window.location.href = "./index.html";
-              alert("you have logged out");
-          }) 
-          });
-      } else {
-         $('logout').style.display = "none";
-         $('comment').style.display = "none";
-         $('upfile').style.display = "none";
-         $('up-but').style.display = "none";      
-     }
-  });
-};
 
 includeHTML();
-log();

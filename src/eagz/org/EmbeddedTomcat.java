@@ -18,6 +18,7 @@ public class EmbeddedTomcat {
 	static GetFile getFile = new GetFile();
 	static Stream stream = new Stream();
 	static Comments comment = new Comments();
+	static Likes likes = new Likes();
 	
 	public static void main(String[] args) throws IOException, LifecycleException, ServletException {
 
@@ -53,6 +54,9 @@ public class EmbeddedTomcat {
 		
 		Tomcat.addServlet(ctxt, "Comments", comment);
 		ctxt.addServletMappingDecoded("/Comments", "Comments");
+		
+		Tomcat.addServlet(ctxt, "Likes", likes);
+		ctxt.addServletMappingDecoded("/Likes", "Likes");
 		
 		ctxt.setAllowCasualMultipartParsing(true);
 		

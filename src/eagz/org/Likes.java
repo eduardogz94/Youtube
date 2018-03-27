@@ -14,26 +14,26 @@ import org.json.JSONObject;
 
 import eagz.org.utilities.Database;
 
-@WebServlet("/Comments")
-public class Comments extends HttpServlet {
+@WebServlet("/Likes")
+public class Likes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Comments() {
+    public Likes() {
         super();
     }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	PrintWriter out = response.getWriter();
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		Database db = new Database();
 		
 		String filename = request.getParameter("filename");
 		
 		int videoId = db.videoId(filename);
-		String comment = db.getComment(videoId);
+		int like = db.getLike(videoId);
 		
-		System.out.println("Get Comment> " + comment + " On Video->"  + videoId);
-		out.print("Last comment :" + comment);
-    }
+		System.out.println("Get Likes> " + like + " On Video->"  + videoId);
+		out.print("Likes :" + like);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -42,17 +42,16 @@ public class Comments extends HttpServlet {
 		Database db = new Database();
 		
 		String filename = reqBody.getString("filename");
-		String comment = reqBody.getString("comment"); 
 		String email = (String) request.getSession(false).getAttribute("email");
 		int id = db.userId(email);
 		int videoId = db.videoId(filename);
-		int commentId = db.commentId();
+		int like = db.getLike(videoId);
+		db.like(id, videoId, like);
 		
-		db.commentVideo(commentId, videoId, id, comment);
-		json.put("status", "200").put("response", "commented");
-		
-		System.out.println("Post Comment -> " + commentId + " Comment: "+ comment + " On Video-> " + filename);
+		json.put("status", "200").put("response", "liked");
+		System.out.println("Liked -> " + videoId + " User -> " + id + " Like number " + like);
 		out.println(json.toString());
+		
+		
 	}
 }
-

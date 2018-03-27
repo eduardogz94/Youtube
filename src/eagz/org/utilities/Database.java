@@ -89,25 +89,21 @@ public class Database {
 		return state;
 	}
 	
-	public boolean newVideo(String name, String filename,String descripcio) {
-		boolean state = false;
+	public void newVideo(String name, String filename,String descripcio) {
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query_newVideo"));
 			this.pstmt.setString(1, prop.getValue("baseDir"));
 			this.pstmt.setString(2, name);
 			this.pstmt.setString(3, filename);
 			this.pstmt.setString(4, descripcio);
-			this.rs = this.pstmt.executeQuery();
-			state = this.rs.next();
+			this.pstmt.executeQuery();
 		} catch (SQLException e) {
 		e.printStackTrace();
 		}		
-		return state;
 	}
 	
 	
-	public boolean commentVideo(int commentId, int vidId,int id, String comment) {
-		boolean st = false;
+	public void commentVideo(int commentId, int vidId,int id, String comment) {
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query_newComment"));
 			this.pstmt.setInt(1, commentId);
@@ -118,11 +114,9 @@ public class Database {
 		} catch (Exception e) {
 			e.printStackTrace(); 
 		}
-		return st;
 	}
 	
-	public boolean newAccount(String name, String lastname, String username, String password,String email ) {
-		boolean state = false;
+	public void newAccount(String name, String lastname, String username, String password,String email ) {
 		try {
 			md = new Encrypt(password);
 			this.pstmt = con.prepareStatement(prop.getValue("query_new"));
@@ -131,12 +125,10 @@ public class Database {
 			this.pstmt.setString(3,username);
 			this.pstmt.setString(4,md.returnEncrypt());
 			this.pstmt.setString(5,email);
-			this.rs = this.pstmt.executeQuery();
-			state = this.rs.next();
+			this.pstmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return state;
 	}
 	
 	public boolean newType(String descrip) {
@@ -184,6 +176,50 @@ public class Database {
 				e.printStackTrace();
 			}
 		return cid;
+	}
+	
+	public int getLike(int videoId) {
+		int cid = 0;
+		int id = 0;
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_getLike"));
+			this.pstmt.setInt(1,videoId);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					id = this.rs.getInt("likes");
+					cid = id + 1;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return cid;
+	}
+	
+	public void like(int user, int video, int likes) {
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_like"));
+			this.pstmt.setInt(1,user);
+			this.pstmt.setInt(2,video);
+			this.pstmt.setInt(3,likes);
+			this.rs = this.pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public String getComment(int vid) {
+		String id = null;
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_getComment"));
+			this.pstmt.setInt(1, vid);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					id = this.rs.getString("comment_text");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return id;
 	}
 	
 	public int videoId(String filename) {

@@ -27,8 +27,11 @@ public class Stream extends HttpServlet {
 		String name = request.getParameter("filename");
 		
 		InputStream in = new FileInputStream (prop.getValue("baseDir")+ "/" + name);
+		
 		System.out.println("Streaming-> "+ name);
+		
 		String mimeType = "video/mp4";
+		
 		byte[] bytes = new byte[1024];
 		int bytesRead;
 		response.setContentType(mimeType);

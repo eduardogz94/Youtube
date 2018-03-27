@@ -64,15 +64,39 @@ function login() {
 
 function logout() {
 	wrapper.get('/Logout',{},{}).then(function(data){
-		if(data.status == 200) {
+		if(data.status == (200)) {
 			console.log(data);
 			window.location.href = "./index.html";
 			alert("You have been logged out")
 		}else {
 			console.log(data);
-			alert("You're not logged in: " + data.status);
+			alert("You're not logged in: " + data.status + " " + data.email);
 		}
 	}).catch(function(error) {
 		console.log(error);
 		});
 }
+
+function log(){
+    var xhr = new XHR();
+    xhr.get('./Login',{},{}).then((data)=>{
+     if (data.response != "not logged in"){
+         $('login').style.display = "none";
+         $('register').style.display = "none";
+         $('user').textContent = "User ->"+data.email;
+         $('logout').addEventListener('click', function() {
+          xhr.get('./Logout',{},{}).then((data)=> {
+            window.location.href = "./index.html";
+              alert("you have logged out");
+          }) 
+          });
+      } else {
+         $('logout').style.display = "none";
+         $('comment').style.display = "none";
+         $('upfile').style.display = "none";
+         $('up-but').style.display = "none";      
+     }
+  });
+};
+
+log();
