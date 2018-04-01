@@ -1,0 +1,1 @@
+A Youtube using JAVA SE with embedded Tomcat, a runnable jar, config.properties and propertiesReader, proxy and singleton pattern, multipart-config, md-5 encryption, Downloading-Uploading-Streaming videos. With bootstrap.
