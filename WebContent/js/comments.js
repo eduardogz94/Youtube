@@ -32,3 +32,17 @@ function like(){
 		console.log(error);
 		});
 }
+
+/*function getComment(file){
+		wrapper.get('./Comments',{filename:file},{'Content-Type':'application/json'}).then(function(data){
+			if (data.status === 200) {
+				console.log(data);
+				$("comment1").innerHTML = data.responseText;
+				getLikes(file);
+			}else{
+				console.log(data);
+			}	
+	}).catch(function(error) {
+		console.log(error);
+		});	
+}*/

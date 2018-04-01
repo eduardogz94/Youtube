@@ -27,7 +27,7 @@ public class Likes extends HttpServlet {
 		String filename = request.getParameter("filename");
 		
 		int videoId = db.videoId(filename);
-		int like = db.getLike(videoId);
+		int like = db.getLike(videoId) - 1;
 		
 		System.out.println("Get Likes> " + like + " On Video->"  + videoId);
 		out.print("Likes :" + like);

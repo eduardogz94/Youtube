@@ -16,6 +16,7 @@ function upload() {
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
 			$("uploadStatus").textContent = xhr.responseText + "\nFile uploaded";
+			streaming(file);
 		}
 	}
 }
@@ -63,16 +64,16 @@ function getLikes(file){
 		}
 }
 
-function streaming(){
-	var url1 = "./GetFile?filename="+ "5mb.mp4";
+function streaming(file){
+	var url1 = "./GetFile?filename="+ file;
 
 	xhr.open("GET",url1,true);
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
-			$("stream1").src =  './Stream?filename='+ "5mb.mp4";
-			$("stream1").setAttribute("filename","5mb.mp4");
+			$("stream1").src =  './Stream?filename='+ file;
+			$("stream1").setAttribute("filename",file);
 			console.log("Streaming -> " + $("stream1").getAttribute("filename"));
 		}
 	}
@@ -87,21 +88,21 @@ function streaming1(){
 		if (xhr.status === 200 && xhr.readyState === 4) {
 			$("stream2").src = './Stream?filename='+ "10mb.mp4";
 			$("stream2").setAttribute("filename","10mb.mp4");
-			console.log("Streaming -> " + $("stream2").getAttribute("filename"));
-			streaming();	
+			console.log("Streaming -> " + $("stream2").getAttribute("filename"));	
 		}
 	}
 }
 
 function click1(){
-	var url = "./GetFile?filename="+ $('stream1').getAttribute("filename");
+	var file = $('stream1').getAttribute("filename");
+	var url = "./GetFile?filename="+ file;
 	xhr.open("GET",url,true);
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
-			$("stream").src =  './Stream?filename='+ "5mb.mp4";
-			$("stream").setAttribute("filename","5mb.mp4");
+			$("stream").src =  './Stream?filename='+ file;
+			$("stream").setAttribute("filename",file);
 			console.log("Streaming -> " + $("stream1").getAttribute("filename"));
 			getComment($('stream1').getAttribute("filename"));
 		}
@@ -111,14 +112,15 @@ function click1(){
 }
 
 function click2(){
-	var url = "./GetFile?filename="+ $('stream1').getAttribute("filename");
+	var file = $('stream2').getAttribute("filename")
+	var url = "./GetFile?filename="+ $('stream2').getAttribute("filename");
 	xhr.open("GET",url,true);
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
-			$("stream").src =  './Stream?filename='+ "10mb.mp4";
-			$("stream").setAttribute("filename","10mb.mp4");
+			$("stream").src =  './Stream?filename='+ file;
+			$("stream").setAttribute("filename",file);
 			console.log("Streaming -> " + $("stream2").getAttribute("filename"));
 			getComment($('stream2').getAttribute("filename"));
 		}

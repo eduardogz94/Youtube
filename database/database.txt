@@ -27,7 +27,7 @@ CREATE TABLE public.media_thumbnail (
                 media_id INTEGER NOT NULL DEFAULT nextval('public.media_thumbnail_media_id_seq'),
                 media_url VARCHAR NOT NULL,
                 media_name VARCHAR(20) NOT NULL,
-                media_fileName VARCHAR(25) NOT NULL,
+                media_filename VARCHAR(25) NOT NULL,
                 media_views INTEGER NOT NULL,
                 media_des VARCHAR(250) NOT NULL,
                 created_at TIMESTAMP NOT NULL,
@@ -68,7 +68,6 @@ CREATE TABLE public.comments (
                 id_user INTEGER NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 comment_text VARCHAR(250) NOT NULL,
-                comment_available BOOLEAN DEFAULT true NOT NULL,
                 CONSTRAINT comments_pk PRIMARY KEY (comment_id)
 );
 
@@ -76,9 +75,9 @@ CREATE TABLE public.comments (
 ALTER SEQUENCE public.comments_id_comments_seq OWNED BY public.comments.comment_id;
 
 CREATE TABLE public.likes (
-                id_user INTEGER NOT NULL,
                 media_id INTEGER NOT NULL,
-                CONSTRAINT likes_pk PRIMARY KEY (id_user, media_id)
+                id_user INTEGER NOT NULL,
+                likes INTEGER NOT NULL
 );
 
 

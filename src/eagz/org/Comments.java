@@ -23,14 +23,17 @@ public class Comments extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	PrintWriter out = response.getWriter();
 		Database db = new Database();
+		JSONObject json = new JSONObject();
 		
 		String filename = request.getParameter("filename");
 		
 		int videoId = db.videoId(filename);
+		
 		String comment = db.getComment(videoId);
 		
 		System.out.println("Get Comment> " + comment + " On Video->"  + videoId);
-		out.print("Last comment :" + comment);
+		json.put("Comment", comment);
+		out.println("Last Comment: " + comment);
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

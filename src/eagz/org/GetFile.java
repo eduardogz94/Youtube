@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 import eagz.org.utilities.PropertiesReader;
 
@@ -29,7 +32,7 @@ public class GetFile extends HttpServlet {
         response.setHeader("Content-disposition","attachment; filename="+name);
         File my_file = new File(prop.getValue("baseDir")+"/"+name);	
         
-        if (db.checkVideo(name)) {
+        if (db.checkVideo(name) == true) {
         	System.out.println("Get-> " +my_file);
         	OutputStream out = response.getOutputStream();
         	FileInputStream in = new FileInputStream(my_file);
@@ -41,6 +44,13 @@ public class GetFile extends HttpServlet {
         	}
         in.close();
         out.flush();
+        out.close();
+        } else {
+        	JSONObject json = new JSONObject();
+    		PrintWriter out = response.getWriter();
+    		json.put("res","not found");
+    		out.println(json.toString());
+        	
         }
     }
 }

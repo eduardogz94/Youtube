@@ -3,6 +3,7 @@
 	<name>Youtube</name>
 	<comment></comment>
 	<projects>
+		<project>Dis-1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
