@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WEB II - User</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="libs/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="layout/favicon.ico">
+    <link rel="stylesheet" href="layout/style.css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <div id="header" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="navbar navbar-inverse">
+        <div class="navbar-header">  
+          <a class="navbar-brand"  href="./index.html"><img width="65px" src="./logo.png"></a> 
+        </div>
+
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="./index.html">Home</a></li>
+          </ul>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+           <input type="text" class="form-control" style="margin-top: 10px;" id="downfile" placeholder="Search">
+        </div>  
+         <button class="btn btn-primary" style="margin-top: 10px;" onclick="search()">Search</button>
+         <button class="btn btn-primary" style="margin-top: 10px;" onclick="download()">Download</button>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="register"><a href="./signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li id="login"><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" id="account"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="user.html">Edit Account</a></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header"></li>
+                  <li id="logout" onclick="logout()"><a href="./index.html">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
+      </div>
+    </div>
+   </head>
+
+    <body>  
+      <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 btn-primary">
+              <input type="file" class="btn btn-default"  id="upfile">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"  >
+                <button id="up-but" type="button" class="btn btn-primary" onclick="upload()" style="margin-left: -170px">Upload</button>
+                <h3 style="text-align: right;" id="uploadStatus"></h3>
+            </div>
+            <h1>YOUTUBE</h1>
+            <hr/>
+        </div>
+      </div>
+    </body>
+
+
+   <footer  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <section class="fo-container" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-9">
+          <div class="row fo-contacto">
+              <div class="col">Eduardo Gonzalez
+                <div style="text-align: right;">
+                  <a href="tel:0414666666"><img width="3%" src="./images/phone.png"></img>+414 96807**</a>
+                  <a href="mailito:ezangarini@hotmail.com"><img width="3%" src="./images/message-green.png"></img>ezangarini@hotmail.com</a>
+                </div>
+              </div>
+            
+            <div class="row">
+                <ul id="footer-nav" class="d-flex flex-row">
+                  <li class="fo-item"><a href="contacts.html">Github</a></li>
+                  <li class="fo-item"><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+          </div>
+         </div>
+    </section>
+
+    <section class="fo-container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <p class="text-copyright">Copyright ©  All Rights reserved</p>
+        </div>
+      </div>
+    </section>
+  </footer> 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery library -->
+    <script src="libs/jquery/jquery-3.3.1.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script type="text/javaScript" src="libs/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script> 
+    <script type="text/javaScript" src ='js/xhrPromises.js'></script>
+    <script type="text/javaScript" src="js/comments.js"></script>
+    <script type="text/javaScript" src="js/id.js"></script>
+    <script type="text/javaScript" src ='js/file.js'></script>
+    <script type="text/javaScript" src ='js/is_logged.js'></script>
+    <script type="text/javaScript" src ='js/user_js.js'></script>
+</html>     

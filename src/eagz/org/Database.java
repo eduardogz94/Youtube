@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import eagz.org.utilities.Encrypt;
 import eagz.org.utilities.PropertiesReader;
@@ -17,6 +18,7 @@ public class Database {
 	private Connection con;
 	private PropertiesReader prop = PropertiesReader.getInstance();
 	private Encrypt md;
+	public ArrayList<String> arr = new ArrayList<String>();
 	
 	public Database(){
 		try {
@@ -101,7 +103,7 @@ public class Database {
 			this.pstmt.setString(2, name);
 			this.pstmt.setString(3, filename);
 			this.pstmt.setString(4, descripcio);
-			this.pstmt.executeQuery();
+			this.pstmt.executeUpdate();
 		} catch (SQLException e) {
 		e.printStackTrace();
 		}		
@@ -130,7 +132,7 @@ public class Database {
 			this.pstmt.setString(3,username);
 			this.pstmt.setString(4,md.returnEncrypt());
 			this.pstmt.setString(5,email);
-			this.pstmt.executeQuery();
+			this.pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -206,25 +208,24 @@ public class Database {
 			this.pstmt.setInt(1,user);
 			this.pstmt.setInt(2,video);
 			this.pstmt.setInt(3,likes);
-			this.rs = this.pstmt.executeQuery();
+			this.pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	
-	public String getComment(int vid) {
-		String id = null;
+	public ArrayList<String> getComment(int vid) {
 		try {
 			this.pstmt = this.con.prepareStatement(prop.getValue("query_getComment"));
 			this.pstmt.setInt(1, vid);
 			this.rs = this.pstmt.executeQuery();
 				while (this.rs.next()) 		
-					id = this.rs.getString("comment_text");
+					arr.add(this.rs.getString("comment_text"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		return id;
+		return arr;
 	}
 	
 	public int videoId(String filename) {

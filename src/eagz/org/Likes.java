@@ -15,14 +15,14 @@ import org.json.JSONObject;
 @WebServlet("/Likes")
 public class Likes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	Database db = new Database();   
     public Likes() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		Database db = new Database();
+		
 		
 		String filename = request.getParameter("filename");
 		
@@ -37,7 +37,7 @@ public class Likes extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-		Database db = new Database();
+		
 		
 		String filename = reqBody.getString("filename");
 		String email = (String) request.getSession(false).getAttribute("email");
@@ -49,7 +49,5 @@ public class Likes extends HttpServlet {
 		json.put("status", "200").put("response", "liked");
 		System.out.println("Liked -> " + videoId + " User -> " + id + " Like number " + like);
 		out.println(json.toString());
-		
-		
 	}
 }

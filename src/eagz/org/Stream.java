@@ -17,7 +17,7 @@ import eagz.org.utilities.PropertiesReader;
 public class Stream extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PropertiesReader prop = PropertiesReader.getInstance();
-
+	
     public Stream() {
         super();	
     }

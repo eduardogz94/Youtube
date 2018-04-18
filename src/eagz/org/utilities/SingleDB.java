@@ -6,11 +6,12 @@ public class SingleDB {
 		private String password = prop.getValue("dbPassword");
 		private String url = prop.getValue("dbUrl");
 		private String driver = prop.getValue("dbDriver");
+
 			
 		private static SingleDB instance = new SingleDB();
 		
 		public static SingleDB getInstance(){
-		return instance;
+			return instance;
 		}
 		
 		public String getUsername() {

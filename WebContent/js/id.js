@@ -51,7 +51,7 @@ function login() {
 	wrapper.post('/Login',{email:email, password:password},{'Content-Type':'application/json'}).then(function(data){
 		if(data.status == (200)) {
 			console.log(data);
-			window.location.href = "./index.html";
+			window.location.href = "./user.html";
 			alert("Log in successful")
 		}else {
 			console.log(data);
@@ -77,26 +77,5 @@ function logout() {
 		});
 }
 
-function log(){
-    var xhr = new XHR();
-    xhr.get('./Login',{},{}).then((data)=>{
-     if (data.response != "not logged in"){
-         $('login').style.display = "none";
-         $('register').style.display = "none";
-         $('user').textContent = "User ->"+data.email;
-         $('logout').addEventListener('click', function() {
-          xhr.get('./Logout',{},{}).then((data)=> {
-            window.location.href = "./index.html";
-              alert("you have logged out");
-          }) 
-          });
-      } else {
-         $('logout').style.display = "none";
-         $('comment').style.display = "none";
-         $('upfile').style.display = "none";
-         $('up-but').style.display = "none";      
-     }
-  });
-};
 
-log();
+

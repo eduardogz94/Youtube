@@ -16,7 +16,7 @@ import org.json.JSONObject;
 @WebServlet("/Signup")
 public class Signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	Database db = new Database();
     public Signup() {
         super();
     }
@@ -26,7 +26,6 @@ public class Signup extends HttpServlet {
  		HttpSession session = request.getSession();
  		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
  		JSONObject json = new JSONObject();
- 		Database db = new Database();
  		
  		String email = reqBody.getString("email"); 
  		String password = reqBody.getString("password");

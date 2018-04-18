@@ -19,7 +19,7 @@ import eagz.org.utilities.PropertiesReader;
 @WebServlet("/GetFile")
 public class GetFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Database db = new Database();
+	Database db = new Database();
 	private PropertiesReader prop = new PropertiesReader();
 
     public GetFile() {
@@ -50,7 +50,6 @@ public class GetFile extends HttpServlet {
     		PrintWriter out = response.getWriter();
     		json.put("res","not found");
     		out.println(json.toString());
-        	
         }
     }
 }

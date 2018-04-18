@@ -1,4 +1,4 @@
-function XHR() {
+function XHR(){
 
 	var jsonToParams= function(json){
 		var res="";

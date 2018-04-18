@@ -23,7 +23,7 @@ import eagz.org.utilities.PropertiesReader;
 public class FileUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PropertiesReader prop = PropertiesReader.getInstance();
-	private Database db = new Database();
+	Database db = new Database();
 	OutputStream os = null;
 	
     public FileUp() {

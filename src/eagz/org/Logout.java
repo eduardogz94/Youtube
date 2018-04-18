@@ -16,7 +16,7 @@ import org.json.JSONObject;
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
     public Logout() { 
     	super(); 
     }
@@ -26,13 +26,13 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) { 
-			json.put("response","You have logged out").put("status","200");
-			System.out.println("Logout --");
+			json.put("status", "401").put("response", "You're not logged in");
+			System.out.println("Not logged --");
 			session.invalidate();
 		}
 		else { 
-			json.put("response", "You're not logged in").put("status", "400");
-			System.out.println("Not logged --");
+			json.put("status","200").put("response","You have logged out");
+			System.out.println("Logout --");
 			session.invalidate();
 		}
 		out.print(json.toString());

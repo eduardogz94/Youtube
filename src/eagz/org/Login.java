@@ -19,6 +19,7 @@ import eagz.org.utilities.Encrypt;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Encrypt md;
+	Database db = new Database();
 	
     public Login() {
         super();
@@ -29,7 +30,8 @@ public class Login extends HttpServlet {
 		HttpSession session = request.getSession();
 		JSONObject json = new JSONObject();
 		if(session.isNew()) {
-			json.put("response", "not logged in").put("status", "403");
+			json.put("status", "401")
+			.put("response", "not logged in");
 			session.invalidate();
 		} else {
 			json.put("status", "200")
@@ -45,7 +47,6 @@ public class Login extends HttpServlet {
 		JSONObject json = new JSONObject();
 		HttpSession session = request.getSession();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-		Database db = new Database();
 		if(session.isNew()) {
 			String email = reqBody.getString("email"); 
 			String pass = reqBody.getString("password");

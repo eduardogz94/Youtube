@@ -39,6 +39,23 @@ function download() {
 	}
 }
 
+function search() {
+	file = $("downfile").value + ".mp4";
+	var url = "./GetFile?filename="+ file;
+	$('stream').autostart = true;
+	$('stream').controls = true;
+
+	xhr.open("GET",url,true);
+	xhr.send();
+	xhr.onreadystatechange = function () {
+		if (xhr.status === 200 && xhr.readyState === 4) {
+			$("stream").src =  './Stream?filename='+file;
+			$("stream").setAttribute("filename",file);
+			getComment(file);
+		}
+	}
+}
+
 function getComment(file){
 	var comment = "./Comments?filename=" + file;
 	xhr.open("GET",comment,true);
@@ -128,5 +145,3 @@ function click2(){
 	$('stream').autostart = true;
 	$('stream').controls = true;
 }
-
-streaming1();
