@@ -10,6 +10,7 @@ function is_log1(){
      if (data.response != 'not logged in'){
       } else{
          $('like').style.display = "none";
+         $('deletelike').style.display = "none";
          $('com').style.display = "none";
          $('comment').style.display = "none";
      }

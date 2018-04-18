@@ -34,7 +34,7 @@ public class Comments extends HttpServlet {
 			ArrayList<String> comment = db.getComment(videoId);
 			
 			for(int i=0; i<comment.size();i++) {
-				System.out.println(comment.get(i) + "\n"); 
+				System.out.println(comment.get(i)); 
 				out.println("Comment: " + comment.get(i));
 				comment.remove(i);
 			}

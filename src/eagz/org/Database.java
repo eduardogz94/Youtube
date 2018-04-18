@@ -63,6 +63,23 @@ public class Database {
 		return state;
 	}
 	
+	public boolean checkLike(int videoId) {
+		boolean state = false;
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_checkLike"));
+			this.pstmt.setInt(1, videoId);
+			this.rs = this.pstmt.executeQuery();
+			rs.next();
+			if(this.rs.getString("is_like").equals("1")) {
+				state = true;
+			System.out.println("is liked? "+ state);
+			}
+		}catch(Exception e) {
+			e.getStackTrace();
+		}
+		return state;
+	}		
+		
 	public boolean checkSign(String email) {
 		boolean state = false;
 		try {
@@ -110,18 +127,7 @@ public class Database {
 	}
 	
 	
-	public void commentVideo(int commentId, int vidId,int id, String comment) {
-		try {
-			this.pstmt = con.prepareStatement(prop.getValue("query_newComment"));
-			this.pstmt.setInt(1, commentId);
-			this.pstmt.setInt(2, vidId);
-			this.pstmt.setInt(3, id);
-			this.pstmt.setString(4, comment);
-			this.pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace(); 
-		}
-	}
+	
 	
 	public void newAccount(String name, String lastname, String username, String password,String email ) {
 		try {
@@ -152,6 +158,7 @@ public class Database {
 		}
 		return state;
 	}
+	
 	
 	public int userId(String email) {
 		int id = 0;
@@ -185,49 +192,6 @@ public class Database {
 		return cid;
 	}
 	
-	public int getLike(int videoId) {
-		int cid = 0;
-		int id = 0;
-		try {
-			this.pstmt = this.con.prepareStatement(prop.getValue("query_getLike"));
-			this.pstmt.setInt(1,videoId);
-			this.rs = this.pstmt.executeQuery();
-				while (this.rs.next()) 		
-					id = this.rs.getInt("likes");
-					cid = id + 1;
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		return cid;
-	}
-	
-	public void like(int user, int video, int likes) {
-		try {
-			this.pstmt = con.prepareStatement(prop.getValue("query_like"));
-			this.pstmt.setInt(1,user);
-			this.pstmt.setInt(2,video);
-			this.pstmt.setInt(3,likes);
-			this.pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public ArrayList<String> getComment(int vid) {
-		try {
-			this.pstmt = this.con.prepareStatement(prop.getValue("query_getComment"));
-			this.pstmt.setInt(1, vid);
-			this.rs = this.pstmt.executeQuery();
-				while (this.rs.next()) 		
-					arr.add(this.rs.getString("comment_text"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		return arr;
-	}
-	
 	public int videoId(String filename) {
 		int id = 0;
 		try {
@@ -243,6 +207,71 @@ public class Database {
 			}
 		return id;
 	}
+	
+	
+	public void like(int user, int video, int likes) {
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_like"));
+			this.pstmt.setInt(1,user);
+			this.pstmt.setInt(2,video);
+			this.pstmt.setInt(3,likes);
+			this.pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void commentVideo(int commentId, int vidId,int id, String comment) {
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_newComment"));
+			this.pstmt.setInt(1, commentId);
+			this.pstmt.setInt(2, vidId);
+			this.pstmt.setInt(3, id);
+			this.pstmt.setString(4, comment);
+			this.pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		}
+	}
+	
+	public void deleteLike(int user) {
+		try {
+			this.pstmt = con.prepareStatement(prop.getValue("query_deleteLike"));
+			this.pstmt.setInt(1, user);
+			this.pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		}
+	}
+	
+	public ArrayList<String> getComment(int vid) {
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_getComment"));
+			this.pstmt.setInt(1, vid);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					arr.add(this.rs.getString("comment_text"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return arr;
+	}
+	
+	public int getLike(int videoId) {
+		int id = 0;
+		try {
+			this.pstmt = this.con.prepareStatement(prop.getValue("query_getLike"));
+			this.pstmt.setInt(1,videoId);
+			this.rs = this.pstmt.executeQuery();
+				while (this.rs.next()) 		
+					id = this.rs.getInt("n_like");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return id;
+	}
+	
+	
 	
 	public void closeCon() {
 		try {

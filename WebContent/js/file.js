@@ -15,8 +15,7 @@ function upload() {
 
 	xhr.onreadystatechange = function () {
 		if (xhr.status === 200 && xhr.readyState === 4) {
-			$("uploadStatus").textContent = xhr.responseText + "\nFile uploaded";
-			streaming(file);
+			$("uploadStatus").textContent = xhr.responseText;
 		}
 	}
 }
@@ -92,20 +91,6 @@ function streaming(file){
 			$("stream1").src =  './Stream?filename='+ file;
 			$("stream1").setAttribute("filename",file);
 			console.log("Streaming -> " + $("stream1").getAttribute("filename"));
-		}
-	}
-}
-
-function streaming1(){
-	var url2 = "./GetFile?filename="+ "10mb.mp4";
-	xhr.open("GET",url2,true);
-	xhr.send();
-
-	xhr.onreadystatechange = function () {
-		if (xhr.status === 200 && xhr.readyState === 4) {
-			$("stream2").src = './Stream?filename='+ "10mb.mp4";
-			$("stream2").setAttribute("filename","10mb.mp4");
-			console.log("Streaming -> " + $("stream2").getAttribute("filename"));	
 		}
 	}
 }

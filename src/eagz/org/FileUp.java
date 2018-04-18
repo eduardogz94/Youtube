@@ -55,8 +55,8 @@ public class FileUp extends HttpServlet {
 						byte[] bytes = new byte[1024];
 						while ((read = filecontent.read(bytes)) != -1) {
 							os.write(bytes, 0, read);
-							out.print("File uploaded");
 						}
+						out.print("File uploaded");
 					}
 				}
 			} catch (Exception e) {

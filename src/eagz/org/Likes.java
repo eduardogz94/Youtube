@@ -23,11 +23,10 @@ public class Likes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		
-		
 		String filename = request.getParameter("filename");
 		
 		int videoId = db.videoId(filename);
-		int like = db.getLike(videoId) - 1;
+		int like = db.getLike(videoId);
 		
 		System.out.println("Get Likes> " + like + " On Video->"  + videoId);
 		out.print("Likes :" + like);
@@ -44,10 +43,14 @@ public class Likes extends HttpServlet {
 		int id = db.userId(email);
 		int videoId = db.videoId(filename);
 		int like = db.getLike(videoId);
-		db.like(id, videoId, like);
-		
-		json.put("status", "200").put("response", "liked");
-		System.out.println("Liked -> " + videoId + " User -> " + id + " Like number " + like);
+		if(db.checkLike(videoId) == true) {
+			json.put("status", "403").put("response", "already liked");
+			System.out.println("Already has a like");
+		}else {
+			db.like(id, videoId, like);
+			json.put("status", "200").put("response", "liked");
+			System.out.println("Liked -> " + videoId + " User -> " + id + " Like number " + like);
+		}
 		out.println(json.toString());
 	}
 }

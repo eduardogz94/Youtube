@@ -77,5 +77,16 @@ function logout() {
 		});
 }
 
-
+function deleteLike(file){
+	wrapper.post('/DeleteLike',{filename:file, email:data.email},{'Content-Type':'application/json'}).then(function(data){
+		if(data.status == 200) {
+			console.log(data);
+			alert("Like deleted")
+		}else {
+			console.log(data);
+		}
+	}).catch(function(error) {
+		console.log(error);
+		});
+}
 

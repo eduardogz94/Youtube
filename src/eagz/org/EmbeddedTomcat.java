@@ -19,6 +19,7 @@ public class EmbeddedTomcat {
 	static Stream stream = new Stream();
 	static Comments comment = new Comments();
 	static Likes likes = new Likes();
+	static DeleteLike dlike = new DeleteLike();
 	
 	public static void main(String[] args) throws IOException, LifecycleException, ServletException {
 
@@ -55,6 +56,8 @@ public class EmbeddedTomcat {
 		Tomcat.addServlet(ctxt, "Comments", comment);
 		ctxt.addServletMappingDecoded("/Comments", "Comments");
 		
+		Tomcat.addServlet(ctxt, "DeleteLike", dlike);
+		ctxt.addServletMappingDecoded("/DeleteLike", "DeleteLike");
 		
 		Tomcat.addServlet(ctxt, "Likes", likes);
 		ctxt.addServletMappingDecoded("/Likes", "Likes");

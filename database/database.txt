@@ -77,7 +77,7 @@ ALTER SEQUENCE public.comments_id_comments_seq OWNED BY public.comments.comment_
 CREATE TABLE public.likes (
                 media_id INTEGER NOT NULL,
                 id_user INTEGER NOT NULL,
-                likes INTEGER NOT NULL
+                like INTEGER NOT NULL
 );
 
 

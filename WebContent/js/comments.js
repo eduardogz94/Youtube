@@ -25,8 +25,10 @@ function like(){
 	wrapper.post('/Likes',{filename:filename},{'Content-Type':'application/json'}).then(function(data){
 		if(data.status == 200) {
 			console.log(data);
+			alert('Liked');
 		}else {
 			console.log(data);
+			alert('Already liked');
 		}
 	}).catch(function(error) {
 		console.log(error);
