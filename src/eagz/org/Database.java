@@ -54,25 +54,23 @@ public class Database {
 			rs.next();
 			if(this.rs.getString("type_id").equals("1")) {
 				state = true;
-			System.out.println("is admin? "+ state);
 			}
-			
 		} catch(Exception e) {
 			e.getStackTrace();
 		}
 		return state;
 	}
 	
-	public boolean checkLike(int videoId) {
+	public boolean checkLike(int videoId, int user) {
 		boolean state = false;
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query_checkLike"));
 			this.pstmt.setInt(1, videoId);
+			this.pstmt.setInt(2, user);
 			this.rs = this.pstmt.executeQuery();
 			rs.next();
 			if(this.rs.getString("is_like").equals("1")) {
 				state = true;
-			System.out.println("is liked? "+ state);
 			}
 		}catch(Exception e) {
 			e.getStackTrace();
@@ -87,7 +85,6 @@ public class Database {
 			this.pstmt.setString(1, email);
 			this.rs = this.pstmt.executeQuery();
 			boolean state1 = this.rs.next();
-			System.out.println("Results:"+ state1);
 			if(state1) {
 				System.out.println("Email exists");
 			} else{
@@ -126,9 +123,6 @@ public class Database {
 		}		
 	}
 	
-	
-	
-	
 	public void newAccount(String name, String lastname, String username, String password,String email ) {
 		try {
 			md = new Encrypt(password);
@@ -159,7 +153,6 @@ public class Database {
 		return state;
 	}
 	
-	
 	public int userId(String email) {
 		int id = 0;
 		try {
@@ -169,7 +162,6 @@ public class Database {
 				while (this.rs.next()) 		
 					id = this.rs.getInt("id_user");
 				return id;
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -185,7 +177,6 @@ public class Database {
 				while (this.rs.next()) 		
 					id = this.rs.getInt("comment_id");
 					cid = id + 1;
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -234,10 +225,11 @@ public class Database {
 		}
 	}
 	
-	public void deleteLike(int user) {
+	public void deleteLike(int user, int video) {
 		try {
 			this.pstmt = con.prepareStatement(prop.getValue("query_deleteLike"));
 			this.pstmt.setInt(1, user);
+			this.pstmt.setInt(2, video);
 			this.pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace(); 
@@ -265,13 +257,11 @@ public class Database {
 			this.rs = this.pstmt.executeQuery();
 				while (this.rs.next()) 		
 					id = this.rs.getInt("n_like");
-			} catch (Exception e) {
+				} catch (Exception e) {
 				e.printStackTrace();
 			}
 		return id;
 	}
-	
-	
 	
 	public void closeCon() {
 		try {

@@ -70,18 +70,21 @@ function logout() {
 			alert("You have been logged out")
 		}else {
 			console.log(data);
-			alert("You're not logged in: " + data.status + " " + data.email);
+			alert("You're not logged in");
 		}
 	}).catch(function(error) {
 		console.log(error);
 		});
 }
 
-function deleteLike(file){
-	wrapper.post('/DeleteLike',{filename:file, email:data.email},{'Content-Type':'application/json'}).then(function(data){
+
+
+function deleteLike(){
+	var file = $('stream').getAttribute("filename");
+	var url = './DeleteLike';
+	wrapper.get(url,{filename:file},{}).then(function(data){
 		if(data.status == 200) {
 			console.log(data);
-			alert("Like deleted")
 		}else {
 			console.log(data);
 		}

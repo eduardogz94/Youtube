@@ -56,10 +56,12 @@ public class Login extends HttpServlet {
 				if (db.checkAdmin(email)) {
 					storeValue(email, pass, userId, session);
 					json.put("status", "200").put("response", "admin");
+		        	System.out.println("------------------------------------------------------------");
 					System.out.println("Admin-> " + email);
 				}else {
 					storeValue(email, pass,userId, session);
 					json.put("status", "200").put("response", "user");
+		        	System.out.println("------------------------------------------------------------");
 					System.out.println("User-> " + email);
 				}
 			}else {

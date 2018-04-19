@@ -5,7 +5,7 @@ function $(id) {
 }
 
 
-function is_log1(){
+function indexDOM(){
     wrapper.get('./Login',{},{}).then((data)=>{
      if (data.response != 'not logged in'){
       } else{
@@ -17,4 +17,4 @@ function is_log1(){
   });
 }
 
-is_log1();
+indexDOM();

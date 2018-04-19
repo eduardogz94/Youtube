@@ -41,6 +41,7 @@ function download() {
 function search() {
 	file = $("downfile").value + ".mp4";
 	var url = "./GetFile?filename="+ file;
+
 	$('stream').autostart = true;
 	$('stream').controls = true;
 
@@ -51,7 +52,7 @@ function search() {
 			$("stream").src =  './Stream?filename='+file;
 			$("stream").setAttribute("filename",file);
 			getComment(file);
-		}
+		}	
 	}
 }
 
@@ -62,11 +63,17 @@ function getComment(file){
 
 		xhr.onreadystatechange = function () {
 			if (xhr.status === 200 && xhr.readyState === 4) {
-				$("comment1").innerHTML = xhr.responseText;
+				console.log(JSON.parse(xhr.response));
+				$("comment1").innerHTML = '';
+				var json = (JSON.parse(xhr.response));
+				for(var i=0;i<json.comment.length;i++){
+					$("comment1").innerHTML += 'Comment: ' + json.comment[i] + '<br>';
+				}
 				getLikes(file);
 			}	
 		}
 }
+
 
 function getLikes(file){
 	var likes = "./Likes?filename=" + file;
@@ -80,6 +87,29 @@ function getLikes(file){
 		}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 function streaming(file){
 	var url1 = "./GetFile?filename="+ file;
 
@@ -129,4 +159,4 @@ function click2(){
 	}
 	$('stream').autostart = true;
 	$('stream').controls = true;
-}
+}*/

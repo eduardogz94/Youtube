@@ -12,8 +12,10 @@ console.log("Comment:" +comment + " Into: " + filename);
 	wrapper.post('/Comments',{comment:comment, filename:filename},{'Content-Type':'application/json'}).then(function(data){
 		if(data.status == 200) {
 			console.log(data);
+			alert('comented');
 		}else {
 			console.log(data);
+			alert('fail comented');
 		}
 	}).catch(function(error) {
 		console.log(error);

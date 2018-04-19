@@ -13,12 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-
 @WebServlet("/Comments")
 public class Comments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Database db = new Database();  
-	
 	
     public Comments() {
         super();
@@ -32,19 +30,11 @@ public class Comments extends HttpServlet {
 		if(db.checkVideo(filename) == true) {
 			int videoId = db.videoId(filename);
 			ArrayList<String> comment = db.getComment(videoId);
-			
-			for(int i=0; i<comment.size();i++) {
-				System.out.println(comment.get(i)); 
-				out.println("Comment: " + comment.get(i));
-				comment.remove(i);
-			}
-						
-			
-			/*json.put("Comment", comment);
-			out.println("Last Comment: " + comment);*/
-		}else {
-			json.put("status", "404");
-			out.println("Video not found");
+			json.put("comment", comment);
+			out.print(json.toString());
+				for(int i=0; i<comment.size();i++) {
+					comment.remove(i);
+				}
 		}
 	}
 
@@ -65,7 +55,8 @@ public class Comments extends HttpServlet {
 		json.put("status", "200").put("response", "commented");
 		
 		System.out.println("Post Comment -> " + commentId + " Comment: "+ comment + " On Video-> " + filename);
+    	System.out.println("------------------------------------------------------------");
+
 		out.println(json.toString());
 	}
 }
-

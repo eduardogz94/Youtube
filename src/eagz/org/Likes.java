@@ -22,7 +22,6 @@ public class Likes extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		
 		String filename = request.getParameter("filename");
 		
 		int videoId = db.videoId(filename);
@@ -37,13 +36,12 @@ public class Likes extends HttpServlet {
 		JSONObject json = new JSONObject();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		
-		
 		String filename = reqBody.getString("filename");
 		String email = (String) request.getSession(false).getAttribute("email");
 		int id = db.userId(email);
 		int videoId = db.videoId(filename);
-		int like = db.getLike(videoId);
-		if(db.checkLike(videoId) == true) {
+		int like = db.getLike(videoId) + 1;
+		if(db.checkLike(videoId,id) == true) {
 			json.put("status", "403").put("response", "already liked");
 			System.out.println("Already has a like");
 		}else {

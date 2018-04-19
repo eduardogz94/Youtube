@@ -31,25 +31,28 @@ public class GetFile extends HttpServlet {
         String name = request.getParameter("filename");
         response.setHeader("Content-disposition","attachment; filename="+name);
         File my_file = new File(prop.getValue("baseDir")+"/"+name);	
-        
+        response.sendRedirect("http://localhost:8080/index.html");
         if (db.checkVideo(name) == true) {
+        	System.out.println("------------------------------------------------------------");
         	System.out.println("Get-> " +my_file);
+        	
         	OutputStream out = response.getOutputStream();
         	FileInputStream in = new FileInputStream(my_file);
-        
-        byte[] buffer = new byte[4096];
-        int length;
-        	while ((length = in.read(buffer)) > 0){
-        		out.write(buffer, 0, length);
-        	}
-        in.close();
-        out.flush();
-        out.close();
-        } else {
+        	
+        	byte[] buffer = new byte[4096];
+        	int length;
+        		while ((length = in.read(buffer)) > 0){
+        			out.write(buffer, 0, length);
+        		}
+	        in.close();
+	        out.flush();
+	        out.close();
+	    } else {
         	JSONObject json = new JSONObject();
     		PrintWriter out = response.getWriter();
     		json.put("res","not found");
     		out.println(json.toString());
-        }
+        }        
     }
+    
 }

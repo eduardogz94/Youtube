@@ -15,73 +15,26 @@
    line-height: 1rem;
 }
 
-#console {
-    margin: 0px;
-    padding: 0px;
-    background-color: black;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    margin: 0px;
-    padding: 0px;
+.sign #signbutton{
+    padding-bottom: 10px;
+    align-content: center;
+    padding-right: 0px;
+
 }
-
-#consoletext {
-    color: white;
-    font-family: Monospace;
-    margin: 10px 0px 0px 10px;
-}
-
-ol, ul {
-    list-style: none;
-}
-
-/*-------------------------------------*/
-/* lIST STYLES */
-/*-------------------------------------*/
-ul, ol {
-    margin-bottom: 18px;
-    margin-left: 18px;
-}
-
-ul {
-    list-style: square outside;
-}
-
-    /* Nested Styles */
-    ul ul, ul ol,
-    ol ol, ol ul {
-        margin-left: 18px;
-        margin-bottom: 0;
-    }
-
-    ol ol {
-        list-style: lower-roman;
-    }
-
-li p {
-    line-height: 18px;
-}
-
-
 /* Inicio de footer */
 footer{
   position: absolute;
   padding: 0;
-  padding-bottom: 150px;
-   margin-top:0;
+  padding-bottom: 0px;
+   margin-top:3%;
    width:100%;
    height: 0px;
 }
 #footer-nav{
     padding:0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-   	font-size: 14px;
-   	line-height: 1rem;
+    font-size: 14px;
+    line-height: 1rem;
     display:-webkit-inline-box;
     display:-ms-inline-flexbox;
     display:inline-flex;
@@ -94,7 +47,7 @@ footer .fo-container>.row>div{
     flex-direction: column;
 }
 footer .fo-container:first-child{
-    background:gray;
+    background:black;
 }
 footer .fo-container:first-child >div{
     height:110.381px;
@@ -127,7 +80,7 @@ footer .fo-item a{
     font-size:1.475rem;
     color:#051D49;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-   	line-height: 1rem;
+    line-height: 1rem;
     padding:0 16px;
     text-decoration: initial;
 }
@@ -152,69 +105,52 @@ footer .fo-item a{
     }
 }
 footer .fo-contacto{
-    line-height:2.5rem;
+    line-height:1rem;
 }
 footer .fo-contacto .col:nth-child(1){
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 2.5rem;
+    font-size: 1.35rem;
+    line-height: 1.5rem;
     color:white;
 }
 footer .fo-contacto .col:nth-child(2){
-    font-family: "Franklin Gothic Demi";
-    font-size:2.05rem;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:1.35rem;
     color:white;
-    padding:0;
+    padding:10px;
 }
 footer .fo-contacto .col:nth-child(3){
-    font-family: "Franklin Gothic Demi";
-    font-size:2.05rem;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:1.35rem;
     color:white;
-    padding:0;
+    padding:10px;
 }
 footer .fo-contacto a{
     color:white;
     text-decoration: initial;
-    line-height: 1.857143rem;
-   	}
+    line-height: 1.457143rem;
+    padding: 0 10px;
+    }
 footer .fo-contacto a:hover{
-    color:#051d49!important;
-}
-footer .fo-reconocimiento{
-    font-family: "Franklin Gothic Book";
-    font-size:0.625rem;
-    color:white;
-    text-align: right;
-    line-height:0.75rem;
-}
-footer .fo-rrss i::before{
-    font-size:1.7rem;
-    color:white;
-    padding:0 2px;
-}
-footer .fo-rrss i:hover::before{
-    color:#051d49;
-}
-footer .fo-rrss a{
-    text-decoration: initial;
+    color:#2c55ce!important;
 }
 @media (max-width:1170px){
     footer .fo-rrss i::before {
-        font-size: 1.9rem;
+        font-size: 1.4rem;
         padding: 0 1px;
     }
     @media (max-width:1086px){
         footer .fo-rrss i::before {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             padding: 0;
         }
     }
     @media (max-width:1126px){
         footer .fo-item a {
-            font-size: 1.41875rem;
+            font-size: 1.1875rem;
             color: #051D49;
             font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-   			line-height: 1rem;
+            line-height: 1rem;
             padding: 0 20px;
         }
     }
